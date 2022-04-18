@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopApplication", "DesktopApplication\DesktopApplication.csproj", "{7E0480BF-4B8F-4538-B096-97E2DED0CC1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApplication", "DesktopApplication\WPFApplication.csproj", "{7E0480BF-4B8F-4538-B096-97E2DED0CC1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

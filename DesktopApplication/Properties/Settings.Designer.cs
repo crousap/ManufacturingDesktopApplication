@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DesktopApplication.Properties
+namespace Application.Properties
 {
 
 
