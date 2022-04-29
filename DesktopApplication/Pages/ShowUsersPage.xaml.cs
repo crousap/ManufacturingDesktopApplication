@@ -48,12 +48,12 @@ namespace DesktopApplication.Pages
         private void listViewUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Holder.User = (UserInfoView)listViewUsers.SelectedItem;
-            Holder.Window.Hide();
-            var window = new Windows.UserInfoFields().ShowDialog();
-            Holder.Window.Show();
+            var userInfoFields = new Windows.UserInfoFields();
+            userInfoFields.ShowDialog();
+            //updateList(); 
         }
 
-        public void updateList()
+        private void updateList()
         {
             listViewUsers.SelectedItem = null;
             Context.UserInfoViews.Load();
@@ -78,6 +78,6 @@ namespace DesktopApplication.Pages
                     select user).ToList();
 
         }
-        
+
     }
 }

@@ -22,13 +22,12 @@ namespace DesktopApplication.Windows
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)
         {
-            Holder.ShowUsersPage.updateList();
-            Close();
+
         }
 
         private void buttonWrite_Click(object sender, RoutedEventArgs e)
         {
-            buttonClose_Click(sender, e);
+            //buttonClose_Click(sender, e);
         }
     }
 }
