@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace DesktopApplication.Classes
 {
     public static class Navigator
     {
-        static Frame MainFrame;
-        static Window MainWindow;
+        public static Frame MainFrame;
+        public static Window MainWindow;
+        public static DbModel.User EditUser;
     }
 }

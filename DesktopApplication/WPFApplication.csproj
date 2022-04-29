@@ -99,6 +99,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Authorizator.cs" />
+    <Compile Include="Classes\Holder.cs" />
+    <Compile Include="Classes\NotEmptyValidationRule.cs" />
     <Compile Include="DbModel\Client.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -147,6 +149,9 @@
     <Compile Include="DbModel\UserInfo.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbModel\UserInfoView.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbModel\Warehouse.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -156,8 +161,14 @@
     <Compile Include="Pages\ManagerPage.xaml.cs">
       <DependentUpon>ManagerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ShowUsersPage.xaml.cs">
+      <DependentUpon>ShowUsersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PagesHolder.xaml.cs">
       <DependentUpon>PagesHolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UserInfoFields.xaml.cs">
+      <DependentUpon>UserInfoFields.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -176,7 +187,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShowUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\PagesHolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UserInfoFields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +247,7 @@
       <DependentUpon>DbModel.edmx</DependentUpon>
       <LastGenOutput>DbModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\picture.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

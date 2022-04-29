@@ -24,6 +24,7 @@ namespace DesktopApplication.DbModel
         public int ClientId { get; set; }
         public string UserLogin { get; set; }
         public string Description { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual User User { get; set; }

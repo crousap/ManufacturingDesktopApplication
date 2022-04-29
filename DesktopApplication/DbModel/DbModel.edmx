@@ -30,6 +30,7 @@
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="UserLogin" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStock">
           <Key>
@@ -86,7 +87,7 @@
           <Property Name="ResidentialAddress" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="BirthDate" Type="date" Nullable="false" />
           <Property Name="Passport" Type="int" Nullable="false" />
-          <Property Name="ContactId" Type="int" Nullable="false" />
+          <Property Name="ContactId" Type="int" />
           <Property Name="Photo" Type="image" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="150" />
@@ -123,6 +124,32 @@
           <Property Name="Address" Type="varchar" MaxLength="350" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserInfoView">
+          <Key>
+            <PropertyRef Name="UserLogin" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ResidentialAddress" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="Passport" />
+            <PropertyRef Name="PhoneNumber" />
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="UserLogin" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="150" />
+          <Property Name="ResidentialAddress" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Passport" Type="int" Nullable="false" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Contact_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
@@ -317,6 +344,22 @@
           <EntitySet Name="UserWorkshop" EntityType="Self.UserWorkshop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workshop" EntityType="Self.Workshop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfoView" EntityType="Self.UserInfoView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserInfoView].[UserLogin] AS [UserLogin], 
+    [UserInfoView].[FirstName] AS [FirstName], 
+    [UserInfoView].[LastName] AS [LastName], 
+    [UserInfoView].[MiddleName] AS [MiddleName], 
+    [UserInfoView].[ResidentialAddress] AS [ResidentialAddress], 
+    [UserInfoView].[BirthDate] AS [BirthDate], 
+    [UserInfoView].[Passport] AS [Passport], 
+    [UserInfoView].[ContactId] AS [ContactId], 
+    [UserInfoView].[Photo] AS [Photo], 
+    [UserInfoView].[PhoneNumber] AS [PhoneNumber], 
+    [UserInfoView].[Email] AS [Email], 
+    [UserInfoView].[Role] AS [Role]
+    FROM [dbo].[UserInfoView] AS [UserInfoView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Contact_Client" Association="Self.FK_Contact_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Contact" EntitySet="Contact" />
@@ -401,6 +444,7 @@
           <NavigationProperty Name="Client" Relationship="Self.FK_Order_Client" FromRole="Order" ToRole="Client" />
           <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="Stocks" Relationship="Self.OrderStock" FromRole="Order" ToRole="Stock" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -448,7 +492,7 @@
           <Property Name="ResidentialAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Passport" Type="Int32" Nullable="false" />
-          <Property Name="ContactId" Type="Int32" Nullable="false" />
+          <Property Name="ContactId" Type="Int32" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -627,6 +671,7 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="UserInfoViews" EntityType="manufacturingModel.UserInfoView" />
         </EntityContainer>
         <ComplexType Name="LoginChecker_Result">
           <Property Type="String" Name="Login" Nullable="false" MaxLength="150" />
@@ -664,6 +709,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserInfoView">
+          <Key>
+            <PropertyRef Name="UserLogin" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ResidentialAddress" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="Passport" />
+            <PropertyRef Name="PhoneNumber" />
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ResidentialAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Passport" Type="Int32" Nullable="false" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -692,6 +761,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="manufacturingModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
@@ -828,6 +898,24 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoViews">
+            <EntityTypeMapping TypeName="manufacturingModel.UserInfoView">
+              <MappingFragment StoreEntitySet="UserInfoView">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="ResidentialAddress" ColumnName="ResidentialAddress" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -27,7 +27,7 @@ namespace DesktopApplication.DbModel
             throw new UnintentionalCodeFirstException();
         }
 
-
+        public static manufacturingEntities GetContext() => new manufacturingEntities();
     
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
@@ -39,6 +39,7 @@ namespace DesktopApplication.DbModel
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Workshop> Workshops { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<UserInfoView> UserInfoViews { get; set; }
     
         public virtual ObjectResult<LoginChecker_Result> LoginChecker(string login, string password)
         {
@@ -154,11 +155,6 @@ namespace DesktopApplication.DbModel
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-
-        public static manufacturingEntities GetContext()
-        {
-            return new manufacturingEntities();
         }
     }
 }

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:DesktopApplication.Windows"
         mc:Ignorable="d"
         MinHeight="500" MinWidth="800"
-        Icon="\Resources\logo.png" Title="PagesHolder" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
+        Icon="pack://application:,,,/Resources/logo.png" Title="PagesHolder" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Frame Name="frameMain"/>
+        <Frame Name="frameMain" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DesktopApplication.DbModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DesktopApplication.DbModel;
+using System.Windows;
 
 namespace DesktopApplication.Classes
 {
@@ -19,12 +16,19 @@ namespace DesktopApplication.Classes
 
         public static bool LoginCheck(string login, string password)
         {
-            var result = manufacturingEntities.GetContext().LoginChecker(login, password).FirstOrDefault();
-            if (result != null)
+            try
             {
-                _currentUser = manufacturingEntities.GetContext().Users.Where(x => x.Login == login).First();
-                _isAuthorized = true;
-                _currentRole = (Roles)CurrentUser.Role1.Id;
+                var result = manufacturingEntities.GetContext().LoginChecker(login, password).FirstOrDefault();
+                if (result != null)
+                {
+                    _currentUser = manufacturingEntities.GetContext().Users.Where(x => x.Login == login).First();
+                    _isAuthorized = true;
+                    _currentRole = (Roles)CurrentUser.Role1.Id;
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                MessageBox.Show("Не удалось подключиться к БД");
             }
             return IsAuthorized;
         }

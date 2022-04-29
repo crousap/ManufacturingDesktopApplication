@@ -12,7 +12,7 @@ namespace DesktopApplication.DbModel
     using System;
     using System.Collections.Generic;
     
-    public partial class UserInfo
+    public partial class UserInfoView
     {
         public string UserLogin { get; set; }
         public string FirstName { get; set; }
@@ -25,7 +25,6 @@ namespace DesktopApplication.DbModel
         public byte[] Photo { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-    
-        public virtual User User { get; set; }
+        public string Role { get; set; }
     }
 }
