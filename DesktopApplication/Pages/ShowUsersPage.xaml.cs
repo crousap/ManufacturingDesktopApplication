@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DesktopApplication.Classes;
+using System.Data.Entity;
 
 namespace DesktopApplication.Pages
 {
@@ -14,12 +16,17 @@ namespace DesktopApplication.Pages
     public partial class ShowUsersPage : Page
     {
         public const string NoFilter = "Без фильтра";
+        public manufacturingEntities Context;
+
         public ShowUsersPage()
         {
             InitializeComponent();
             var query = (from role in manufacturingEntities.GetContext().Roles select role.Name).ToList();
             query.Add(NoFilter);
             comboBoxFilter.ItemsSource = query;
+
+            Context = new manufacturingEntities();
+            Holder.ShowUsersPage = this;
         }
 
         private void listViewUsers_Loaded(object sender, RoutedEventArgs e)
@@ -33,20 +40,24 @@ namespace DesktopApplication.Pages
             if (comboBoxFilter.Text == NoFilter)
                 updateList();
             else
-                listViewUsers.ItemsSource = manufacturingEntities.GetContext().UserInfoViews.Where(user => user.Role == comboBoxFilter.Text.Trim()).ToList();
-
+                listViewUsers.ItemsSource = (from user in manufacturingEntities.GetContext().UserInfoViews
+                                             where user.Role == comboBoxFilter.Text.Trim()
+                                             select user).ToList();
         }
 
         private void listViewUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedUser = (UserInfoView)listViewUsers.SelectedItem;
-
+            Holder.User = (UserInfoView)listViewUsers.SelectedItem;
+            Holder.Window.Hide();
             var window = new Windows.UserInfoFields().ShowDialog();
+            Holder.Window.Show();
         }
 
-        private void updateList()
+        public void updateList()
         {
-            listViewUsers.ItemsSource = manufacturingEntities.GetContext().UserInfoViews.ToList();
+            listViewUsers.SelectedItem = null;
+            Context.UserInfoViews.Load();
+            listViewUsers.ItemsSource = Context.UserInfoViews.Local;
         }
 
         private void textBoxSearchBar_KeyDown(object sender, KeyEventArgs e)
@@ -67,5 +78,6 @@ namespace DesktopApplication.Pages
                     select user).ToList();
 
         }
+        
     }
 }

@@ -8,21 +8,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vr="clr-namespace:DesktopApplication.Classes"
     Title="UserInfoFields"
-    Width="auto"
-    Height="auto"
-    MinWidth="350"
-    MinHeight="650"
+    Width="350"
+    Height="650"
     AllowsTransparency="True"
     Background="Transparent"
     Icon="pack://application:,,,/Resources/logo.png"
-    ResizeMode="CanResizeWithGrip"
-    WindowStartupLocation="CenterOwner"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
     <Grid Name="mainGrid">
         <Border Background="White" CornerRadius="15">
             <StackPanel
-                Name="Wrapper"
+                Name="wrapper"
                 Width="300"
                 Margin="10"
                 HorizontalAlignment="Center"
@@ -51,28 +49,13 @@
                         Margin="0,10"
                         materialDesign:HintAssist.Hint="Отчество"
                         materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding MiddleName}" />
                     <DatePicker
                         Name="datePickerBirthdate"
                         Margin="0,10"
-                        materialDesign:HintAssist.Hint="Дата рождения" />
-                </StackPanel>
-                <StackPanel
-                    Name="loginPasswordPanel"
-                    Margin="10"
-                    Orientation="Vertical">
-                    <TextBox
-                        Name="textBoxLogin"
-                        Margin="0,10"
-                        materialDesign:HintAssist.Hint="Логин"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <TextBox
-                        Name="textBoxPassword"
-                        Margin="0,10"
-                        materialDesign:HintAssist.Hint="Пароль"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        materialDesign:HintAssist.Hint="Дата рождения"
+                        SelectedDate="{Binding BirthDate}" />
                 </StackPanel>
                 <StackPanel
                     Name="contactPanel"
@@ -83,36 +66,39 @@
                         Margin="0,10"
                         materialDesign:HintAssist.Hint="Телефонный номер"
                         materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding PhoneNumber}" />
                     <TextBox
                         Name="textBoxEmail"
                         Margin="0,10"
                         materialDesign:HintAssist.Hint="Электронная почта"
                         materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Email}" />
                     <TextBox
                         Name="textBoxAddress"
                         Margin="0,10"
                         materialDesign:HintAssist.Hint="Адрес"
                         materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding ResidantialAddress}" />
                 </StackPanel>
-                <WrapPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <Button
-                        x:Name="buttonWrite"
-                        Margin="10"
-                        Click="buttonWrite_Click"
-                        Content="Записать" />
-                    <Button
-                        x:Name="buttonClose"
-                        Margin="10"
-                        Click="buttonClose_Click"
-                        Content="Закрыть" />
-                </WrapPanel>
             </StackPanel>
         </Border>
+        <WrapPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <Button
+                x:Name="buttonWrite"
+                Margin="10"
+                Click="buttonWrite_Click"
+                Content="Записать" />
+            <Button
+                x:Name="buttonClose"
+                Margin="10"
+                Click="buttonClose_Click"
+                Content="Закрыть" />
+        </WrapPanel>
     </Grid>
 </Window>

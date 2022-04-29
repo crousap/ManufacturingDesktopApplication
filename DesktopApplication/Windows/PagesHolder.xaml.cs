@@ -13,6 +13,8 @@ namespace DesktopApplication.Windows
             InitializeComponent();
             if (Authorizator.CurrentRole == Roles.Менеджер)
                 frameMain.Navigate(new Pages.ManagerPage());
+
+            Holder.Window = this;
         }
     }
 }
