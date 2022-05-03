@@ -17,17 +17,11 @@ namespace DesktopApplication.Windows
         public UserInfoFields()
         {
             InitializeComponent();
-            infoPanel.DataContext = Holder.User;
         }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void buttonWrite_Click(object sender, RoutedEventArgs e)
-        {
-            //buttonClose_Click(sender, e);
+            Close();
         }
     }
 }

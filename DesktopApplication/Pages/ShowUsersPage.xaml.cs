@@ -26,18 +26,6 @@ namespace DesktopApplication.Pages
             Holder.ShowUsersPage = this;
         }
 
-        private void listViewUsers_Loaded(object sender, RoutedEventArgs e)
-        {
-            updateList();
-        }
-
-        private void updateList()
-        {
-            //listViewUsers.SelectedItem = null;
-            //Context.UserInfoViews.Load();
-            //listViewUsers.ItemsSource = Context.UserInfoViews.Local;
-        }
-
         private void textBoxSearchBar_KeyDown(object sender, KeyEventArgs e)
         {
             var query = textBoxSearchBar.Text.Trim();

@@ -72,8 +72,7 @@
             SelectedItem="{Binding CurrentUser}"
             Name="listViewUsers"
             Grid.Row="1"
-            HorizontalAlignment="Stretch"
-            Loaded="listViewUsers_Loaded">
+            HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="45">

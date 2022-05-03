@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:DesktopApplication.Windows"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
     xmlns:vr="clr-namespace:DesktopApplication.Classes"
     Title="UserInfoFields"
     Width="350"
@@ -13,6 +14,9 @@
     Icon="pack://application:,,,/Resources/logo.png"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:UserInfoFIeldsViewModel />
+    </Window.DataContext>
     <Grid Name="mainGrid">
         <StackPanel
             Name="wrapper"
@@ -80,10 +84,10 @@
             </StackPanel>
         </StackPanel>
         <Button
-            Name="buttonWrite"
+            Name="buttonClose"
             Margin="10"
             VerticalAlignment="Bottom"
-            Click="buttonWrite_Click"
+            Click="buttonClose_Click"
             Content="Записать" />
     </Grid>
 </Window>

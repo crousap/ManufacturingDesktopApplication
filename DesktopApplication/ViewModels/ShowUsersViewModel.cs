@@ -13,6 +13,7 @@ namespace DesktopApplication.ViewModels
 {
     public class ShowUsersViewModel : ViewModelBase
     {
+        public manufacturingEntities Context;
         private Role _currentFilter; // comboboxFilter
         public Role CurrentFilter
         {
@@ -67,6 +68,7 @@ namespace DesktopApplication.ViewModels
             {
                 _currentUser = value;
                 OnPropertyChanged(nameof(CurrentUser));
+                EditUserFields(value);
             }
         }
 
@@ -79,6 +81,7 @@ namespace DesktopApplication.ViewModels
 
         public ShowUsersViewModel()
         {
+            Context = new manufacturingEntities();
             LoadUserList();
             Roles = manufacturingEntities.GetContext().Roles.ToList();
             Roles.Add(new Role { Name = Pages.ShowUsersPage.NoFilter });
@@ -86,17 +89,22 @@ namespace DesktopApplication.ViewModels
 
         public void LoadUserList(Role filter = null)
         {
-            using (var ctx = new manufacturingEntities())
+            Context.Users.Load();
+            Context.UserInfoes.Load();
+            if (filter == null || filter.Name == Pages.ShowUsersPage.NoFilter)
             {
-                ctx.Users.Load();
-                ctx.UserInfoes.Load();
-                if (filter == null || filter.Name == Pages.ShowUsersPage.NoFilter)
-                {
-                    Users = ctx.Users.Local;
-                    return;
-                }
-                Users = ToObservableCollection(ctx.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name)));
+                Users = Context.Users.Local;
+                return;
             }
+            Users = ToObservableCollection(Context.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name)));
+        }
+        private void EditUserFields(User user)
+        {
+            Classes.Navigator.EditUser = user;
+            var window = new Windows.UserInfoFields();
+            window.ShowDialog();
+            Context.SaveChanges();
+            LoadUserList(CurrentFilter);
         }
         public ObservableCollection<T> ToObservableCollection<T>(IEnumerable<T> enumeration)
         {
