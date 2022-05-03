@@ -23,7 +23,6 @@ namespace DesktopApplication.Pages
             InitializeComponent();
             var query = (from role in manufacturingEntities.GetContext().Roles select role.Name).ToList();
             query.Add(NoFilter);
-            comboBoxFilter.ItemsSource = query;
 
             Context = new manufacturingEntities();
             Holder.ShowUsersPage = this;
@@ -32,17 +31,6 @@ namespace DesktopApplication.Pages
         private void listViewUsers_Loaded(object sender, RoutedEventArgs e)
         {
             updateList();
-        }
-
-        private void comboBoxFilter_DropDownClosed(object sender, EventArgs e)
-        {
-            //MessageBox.Show(comboBoxFilter.Text);
-            if (comboBoxFilter.Text == NoFilter)
-                updateList();
-            else
-                listViewUsers.ItemsSource = (from user in manufacturingEntities.GetContext().UserInfoViews
-                                             where user.Role == comboBoxFilter.Text.Trim()
-                                             select user).ToList();
         }
 
         private void listViewUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)

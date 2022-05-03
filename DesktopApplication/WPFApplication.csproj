@@ -164,6 +164,8 @@
     <Compile Include="Pages\ShowUsersPage.xaml.cs">
       <DependentUpon>ShowUsersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ShowUsersViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Windows\PagesHolder.xaml.cs">
       <DependentUpon>PagesHolder.xaml</DependentUpon>
     </Compile>
@@ -267,6 +269,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
