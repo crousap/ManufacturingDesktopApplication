@@ -66,12 +66,14 @@
                 </ComboBox.ItemTemplate>-->
             </ComboBox>
         </StackPanel>
+        <!-- Users List -->
         <ListView
+            ItemsSource="{Binding Users}"
+            SelectedItem="{Binding CurrentUser}"
             Name="listViewUsers"
             Grid.Row="1"
             HorizontalAlignment="Stretch"
-            Loaded="listViewUsers_Loaded"
-            SelectionChanged="listViewUsers_SelectionChanged">
+            Loaded="listViewUsers_Loaded">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="45">
@@ -92,14 +94,14 @@
                                 </Image>
                                 <StackPanel Margin="5" Orientation="Vertical">
                                     <TextBlock>
-                                        <Run Text="{Binding FirstName}" />
+                                        <Run Text="{Binding Path=UserInfo.FirstName}" />
                                         <Run Text=" " />
-                                        <Run Text="{Binding LastName}" />
+                                        <Run Text="{Binding Path=UserInfo.LastName}" />
                                         <Run Text=" " />
-                                        <Run Text="{Binding MiddleName}" />
+                                        <Run Text="{Binding Path=UserInfo.MiddleName}" />
                                     </TextBlock>
                                     <TextBlock>
-                                        <Run Text="{Binding UserLogin}" />
+                                        <Run Text="{Binding Login}" />
                                         <Run Text=" " />
                                         <Run Text="{Binding Role}" />
                                     </TextBlock>

@@ -21,8 +21,6 @@ namespace DesktopApplication.Pages
         public ShowUsersPage()
         {
             InitializeComponent();
-            var query = (from role in manufacturingEntities.GetContext().Roles select role.Name).ToList();
-            query.Add(NoFilter);
 
             Context = new manufacturingEntities();
             Holder.ShowUsersPage = this;
@@ -33,19 +31,11 @@ namespace DesktopApplication.Pages
             updateList();
         }
 
-        private void listViewUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Holder.User = (UserInfoView)listViewUsers.SelectedItem;
-            var userInfoFields = new Windows.UserInfoFields();
-            userInfoFields.ShowDialog();
-            //updateList(); 
-        }
-
         private void updateList()
         {
-            listViewUsers.SelectedItem = null;
-            Context.UserInfoViews.Load();
-            listViewUsers.ItemsSource = Context.UserInfoViews.Local;
+            //listViewUsers.SelectedItem = null;
+            //Context.UserInfoViews.Load();
+            //listViewUsers.ItemsSource = Context.UserInfoViews.Local;
         }
 
         private void textBoxSearchBar_KeyDown(object sender, KeyEventArgs e)
