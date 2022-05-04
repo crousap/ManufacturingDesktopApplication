@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Services\Authorizator.cs" />
     <Compile Include="Services\Holder.cs" />
     <Compile Include="Services\NotEmptyValidationRule.cs" />
