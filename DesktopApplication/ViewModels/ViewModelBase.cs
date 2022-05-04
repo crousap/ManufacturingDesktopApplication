@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DesktopApplication.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -15,7 +15,5 @@ namespace DesktopApplication.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public virtual void Dispose() { }
     }
 }
