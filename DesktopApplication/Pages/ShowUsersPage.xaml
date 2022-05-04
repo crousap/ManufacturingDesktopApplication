@@ -13,7 +13,7 @@
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     mc:Ignorable="d">
     <Page.DataContext>
-        <vm:ShowUsersViewModel/>
+        <vm:ShowUsersViewModel />
     </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -38,7 +38,6 @@
                     <!--  Search bar  -->
                     <TextBox
                         x:Name="textBoxSearchBar"
-                        Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                         Grid.Column="1"
                         MinWidth="250"
                         Margin="8,0,0,0"
@@ -46,7 +45,7 @@
                         materialDesign:HintAssist.Hint="Поиск"
                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                         BorderThickness="0"
-                        KeyDown="textBoxSearchBar_KeyDown" />
+                        Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </materialDesign:ColorZone>
             <!--  Filter box  -->
@@ -55,9 +54,9 @@
                 Width="250"
                 Margin="10,2.5,0,2.5"
                 materialDesign:HintAssist.Hint="Some item"
+                DisplayMemberPath="Name"
                 IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
                 ItemsSource="{Binding Roles}"
-                DisplayMemberPath="Name"
                 SelectedItem="{Binding CurrentFilter}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}">
                 <!--<ComboBox.ItemTemplate>
@@ -67,13 +66,13 @@
                 </ComboBox.ItemTemplate>-->
             </ComboBox>
         </StackPanel>
-        <!-- Users List -->
+        <!--  Users List  -->
         <ListView
-            ItemsSource="{Binding Users}"
-            SelectedItem="{Binding CurrentUser}"
             Name="listViewUsers"
             Grid.Row="1"
-            HorizontalAlignment="Stretch">
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding Users}"
+            SelectedItem="{Binding CurrentUser}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="45">
