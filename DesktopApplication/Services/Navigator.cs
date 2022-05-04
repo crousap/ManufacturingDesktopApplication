@@ -5,8 +5,8 @@ namespace DesktopApplication.Services
 {
     public static class Navigator
     {
-        public static Frame MainFrame;
-        public static Window MainWindow;
-        public static DbModel.User EditUser;
+        public static Frame MainFrame { get; set; }
+        public static Window MainWindow { get; set; }   
+        public static DbModel.User EditUser { get; set; }
     }
 }

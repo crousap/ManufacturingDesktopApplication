@@ -99,6 +99,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\TheButtonClicledCommand.cs" />
     <Compile Include="Services\Authorizator.cs" />
     <Compile Include="Services\Holder.cs" />
     <Compile Include="Services\NotEmptyValidationRule.cs" />
@@ -166,6 +167,7 @@
       <DependentUpon>ShowUsersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Roles.cs" />
+    <Compile Include="ViewModels\ManagerPageViewModel.cs" />
     <Compile Include="ViewModels\PagesHolderViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />

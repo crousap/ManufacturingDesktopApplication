@@ -5,11 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:DesktopApplication.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
     Title="ManagerPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
+    <Page.DataContext>
+        <vm:ManagerPageViewModel />
+    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
@@ -21,7 +24,10 @@
                 Margin="10,0,10,0"
                 Click="buttonShowUsers_Click"
                 Content="Список сотрудников" />
-            <Button Name="buttonShowProjects" Content="Показать проекты" />
+            <Button
+                Name="buttonShowProjects"
+                Command="{Binding Button}"
+                Content="Показать проекты" />
         </StackPanel>
         <Frame
             Name="frameManagerPage"
