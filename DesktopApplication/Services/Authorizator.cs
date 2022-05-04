@@ -1,4 +1,5 @@
 ﻿using DesktopApplication.DbModel;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -9,10 +10,16 @@ namespace DesktopApplication.Services
         public static User CurrentUser { get => _currentUser; }
         public static Roles CurrentRole { get => _currentRole; }
         public static bool IsAuthorized { get => _isAuthorized; }
+        public static string RoleString => Enum.GetName(typeof(Roles), CurrentRole);
 
         private static User _currentUser;
         private static Roles _currentRole;
         private static bool _isAuthorized = false;
+
+        public static string GetCaption()
+        {
+            return $"{CurrentUser.Login} : {RoleString}";
+        }
 
         public static bool LoginCheck(string login, string password)
         {

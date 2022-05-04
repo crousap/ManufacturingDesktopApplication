@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApplication.Windows"
+        xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
         mc:Ignorable="d"
         MinHeight="500" MinWidth="800"
-        Icon="pack://application:,,,/Resources/logo.png" Title="PagesHolder" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
+        Icon="pack://application:,,,/Resources/logo.png" Height="700" Width="1200" WindowStartupLocation="CenterScreen"
+        Title="{Binding WindowTitle}">
+    <Window.DataContext>
+        <vm:PagesHolderViewModel/>
+    </Window.DataContext>
     <Grid>
         <Frame Name="frameMain" NavigationUIVisibility="Hidden"/>
     </Grid>

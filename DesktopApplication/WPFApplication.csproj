@@ -165,6 +165,7 @@
       <DependentUpon>ShowUsersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Roles.cs" />
+    <Compile Include="ViewModels\PagesHolderViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
