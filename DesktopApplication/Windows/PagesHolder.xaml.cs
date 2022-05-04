@@ -1,4 +1,4 @@
-﻿using DesktopApplication.Classes;
+﻿using DesktopApplication.Services;
 using System.Windows;
 
 namespace DesktopApplication.Windows

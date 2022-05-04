@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace DesktopApplication.Classes
+namespace DesktopApplication.Services
 {
     public class NotEmptyValidationRule : ValidationRule
     {

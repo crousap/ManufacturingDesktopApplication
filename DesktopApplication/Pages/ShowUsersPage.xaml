@@ -1,81 +1,109 @@
-﻿<Page x:Class="DesktopApplication.Pages.ShowUsersPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:DesktopApplication.Pages"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ShowUsersPage">
-
+﻿<Page
+    x:Class="DesktopApplication.Pages.ShowUsersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DesktopApplication.Pages"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
+    Title="ShowUsersPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:ShowUsersViewModel/>
+    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10*" />
         </Grid.RowDefinitions>
         <StackPanel Name="topToolPannel" Orientation="Horizontal">
             <materialDesign:ColorZone
-                            Mode="Standard"
-                            Padding="8 4 8 4"
-                            CornerRadius="2"
-                            Panel.ZIndex="1"
-                            materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                Margin="10,5,0,5"
+                Padding="8,4,8,4"
                 VerticalAlignment="Center"
-                Margin="10,5,0,5">
-                <Grid >
+                Panel.ZIndex="1"
+                materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                CornerRadius="2"
+                Mode="Standard">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="textBoxSearchBar"
-                                    Grid.Column="1"
-                                    Margin="8 0 0 0"
-                                    materialDesign:HintAssist.Hint="Поиск" 
-                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                    BorderThickness="0"
-                                    MinWidth="250"
-                                    VerticalAlignment="Center" KeyDown="textBoxSearchBar_KeyDown"/>
+                    <!--  Search bar  -->
+                    <TextBox
+                        x:Name="textBoxSearchBar"
+                        Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="1"
+                        MinWidth="250"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Поиск"
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                        BorderThickness="0"
+                        KeyDown="textBoxSearchBar_KeyDown" />
                 </Grid>
             </materialDesign:ColorZone>
+            <!--  Filter box  -->
             <ComboBox
                 x:Name="comboBoxFilter"
-                Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
-                materialDesign:HintAssist.Hint="Some item"
                 Width="250"
-                Margin="10,2.5,0,2.5" DropDownClosed="comboBoxFilter_DropDownClosed"/>
+                Margin="10,2.5,0,2.5"
+                materialDesign:HintAssist.Hint="Some item"
+                IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+                ItemsSource="{Binding Roles}"
+                DisplayMemberPath="Name"
+                SelectedItem="{Binding CurrentFilter}"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                <!--<ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>-->
+            </ComboBox>
         </StackPanel>
-        <ListView Grid.Row="1" Name="listViewUsers" HorizontalAlignment="Stretch" Loaded="listViewUsers_Loaded" SelectionChanged="listViewUsers_SelectionChanged">
+        <!-- Users List -->
+        <ListView
+            ItemsSource="{Binding Users}"
+            SelectedItem="{Binding CurrentUser}"
+            Name="listViewUsers"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="45">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <!--Изображение-->
-                                <Image Margin="5" Width="150" Height="150">
+                                <!--  Изображение  -->
+                                <Image
+                                    Width="150"
+                                    Height="150"
+                                    Margin="5">
                                     <Image.Source>
-                                        <Binding >
+                                        <Binding>
                                             <Binding.TargetNullValue>
                                                 <ImageSource>/Resources/picture.png</ImageSource>
                                             </Binding.TargetNullValue>
                                         </Binding>
                                     </Image.Source>
                                 </Image>
-                                <StackPanel Orientation="Vertical" Margin="5">
+                                <StackPanel Margin="5" Orientation="Vertical">
                                     <TextBlock>
-                                    <Run Text="{Binding FirstName}"/>
-                                    <Run Text=" "/>
-                                    <Run Text="{Binding LastName}"/>
-                                    <Run Text=" "/>
-                                    <Run Text="{Binding MiddleName}"/>
+                                        <Run Text="{Binding Path=UserInfo.FirstName}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding Path=UserInfo.LastName}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding Path=UserInfo.MiddleName}" />
                                     </TextBlock>
                                     <TextBlock>
-                                    <Run Text="{Binding UserLogin}"/>
-                                    <Run Text=" "/>
-                                    <Run Text="{Binding Role}"/>
+                                        <Run Text="{Binding Login}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding Role}" />
                                     </TextBlock>
                                 </StackPanel>
                             </StackPanel>

@@ -16,7 +16,7 @@ namespace DesktopApplication.Pages
         private void buttonShowUsers_Click(object sender, RoutedEventArgs e)
         {
             frameManagerPage.Navigate(new ShowUsersPage());
-            this.Title = Classes.Authorizator.CurrentUser.Role;
+            this.Title = Services.Authorizator.CurrentUser.Role;
         }
     }
 }
