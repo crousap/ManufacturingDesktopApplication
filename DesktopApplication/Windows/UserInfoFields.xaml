@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
-    xmlns:vr="clr-namespace:DesktopApplication.Classes"
+    xmlns:vr="clr-namespace:DesktopApplication.Services"
     Title="UserInfoFields"
     Width="350"
     Height="650"

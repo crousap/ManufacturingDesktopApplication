@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace DesktopApplication.Classes
+namespace DesktopApplication.Services
 {
     public static class Navigator
     {

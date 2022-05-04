@@ -13,7 +13,7 @@
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     mc:Ignorable="d">
     <Page.DataContext>
-        <vm:ShowUsersViewModel />
+        <vm:ShowUsersViewModel/>
     </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,15 +29,16 @@
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
                 CornerRadius="2"
                 Mode="Standard">
-                <!--  search bar  -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    <!--  Search bar  -->
                     <TextBox
                         x:Name="textBoxSearchBar"
+                        Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                         Grid.Column="1"
                         MinWidth="250"
                         Margin="8,0,0,0"

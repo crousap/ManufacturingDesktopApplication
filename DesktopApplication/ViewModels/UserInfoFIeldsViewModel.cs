@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DesktopApplication.Classes;
+using DesktopApplication.Services;
 using DesktopApplication.DbModel;
 
 namespace DesktopApplication.ViewModels
@@ -15,7 +15,7 @@ namespace DesktopApplication.ViewModels
         {
             get
             {
-                return CurrentUser.UserInfo.FirstName;
+                return CurrentUser.UserInfo.FirstName ?? "";
             }
             set
             {
@@ -25,12 +25,12 @@ namespace DesktopApplication.ViewModels
         }
         public string LastName
         {
-            get { return CurrentUser.UserInfo.LastName; }
+            get { return CurrentUser.UserInfo.LastName ?? ""; }
             set { CurrentUser.UserInfo.LastName = value; OnPropertyChanged(nameof(LastName)); }
         }
         public string MiddleName
         {
-            get { return CurrentUser.UserInfo.MiddleName; }
+            get { return CurrentUser.UserInfo.MiddleName ?? ""; }
             set { CurrentUser.UserInfo.MiddleName = value; OnPropertyChanged(nameof(MiddleName));}
         }
         public DateTime BirthDate
@@ -40,17 +40,17 @@ namespace DesktopApplication.ViewModels
         }
         public string PhoneNumber
         {
-            get { return CurrentUser.UserInfo.PhoneNumber; }
+            get { return CurrentUser.UserInfo.PhoneNumber ?? ""; }
             set { CurrentUser.UserInfo.PhoneNumber = value; OnPropertyChanged(nameof(PhoneNumber)); }
         }
         public string Email
         {
-            get { return CurrentUser.UserInfo.Email; }
+            get { return CurrentUser.UserInfo.Email ?? ""; }
             set { CurrentUser.UserInfo.Email = value; OnPropertyChanged(nameof(Email)); }
         }
         public string ResidantialAddress
         {
-            get => CurrentUser.UserInfo.ResidentialAddress;
+            get => CurrentUser.UserInfo.ResidentialAddress ?? "";
             set { CurrentUser.UserInfo.ResidentialAddress = value; OnPropertyChanged(nameof(ResidantialAddress)); }
         }
         public UserInfoFIeldsViewModel()

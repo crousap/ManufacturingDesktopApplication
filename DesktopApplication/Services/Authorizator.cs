@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 
-namespace DesktopApplication.Classes
+namespace DesktopApplication.Services
 {
     public static class Authorizator
     {

@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Application"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vr="clr-namespace:DesktopApplication.Classes"
+    xmlns:vr="clr-namespace:DesktopApplication.Services"
     Title="fabrfabr | Авторизация"
     Width="400"
     Height="600"

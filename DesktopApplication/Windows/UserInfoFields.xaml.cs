@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using DesktopApplication.Classes;
+using DesktopApplication.Services;
 using DesktopApplication.DbModel;
 
 

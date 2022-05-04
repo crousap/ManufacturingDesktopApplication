@@ -98,9 +98,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Authorizator.cs" />
-    <Compile Include="Classes\Holder.cs" />
-    <Compile Include="Classes\NotEmptyValidationRule.cs" />
+    <Compile Include="Services\Authorizator.cs" />
+    <Compile Include="Services\Holder.cs" />
+    <Compile Include="Services\NotEmptyValidationRule.cs" />
     <Compile Include="DbModel\Client.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -181,7 +181,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\Navigator.cs" />
+    <Compile Include="Services\Navigator.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
