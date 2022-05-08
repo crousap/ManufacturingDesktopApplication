@@ -56,7 +56,7 @@ namespace DesktopApplication.ViewModels
                 OnPropertyChanged(nameof(Users));
             }
         }
-        
+
         private string _searchQuery;
         /// <summary>
         /// Поисковая строка
@@ -74,20 +74,20 @@ namespace DesktopApplication.ViewModels
             }
         }
 
-        private User _currentUser;
+        private User _selectedUser;
         /// <summary>
         /// Выбранный в данный момент пользователь из списка
         /// </summary>
-        public User CurrentUser
+        public User SelectedUser
         {
             get
             {
-                return _currentUser;
+                return _selectedUser;
             }
             set
             {
-                _currentUser = value;
-                OnPropertyChanged(nameof(CurrentUser));
+                _selectedUser = value;
+                OnPropertyChanged(nameof(SelectedUser));
                 EditUserFields(value);
             }
         }
@@ -102,7 +102,7 @@ namespace DesktopApplication.ViewModels
         public ShowUsersViewModel()
         {
             Context = new manufacturingEntities();
-            NoFilterRole = new Role { Name = NoFilterCaption };
+            NoFilterRole = new Role { Name = NoFilterCaption }; // Объявляем роль затычку
 
             PropertyChanged += OnSearchBarChanges; // Для отслеживания изменений в поисковой строке
 
@@ -134,7 +134,7 @@ namespace DesktopApplication.ViewModels
             if (string.IsNullOrEmpty(query))
                 UpdateUserList();
             query = query.ToLower();
-            var results = from user in Users
+            var results = from user in Context.Users.Local
                           where (
                               (user.UserInfo?.FirstName.ToLower().StartsWith(query) ?? false)
                               || (user.UserInfo?.LastName.ToLower().StartsWith(query) ?? false)
@@ -152,8 +152,17 @@ namespace DesktopApplication.ViewModels
         }
         private void EditUserFields(User user)
         {
-            Services.Navigator.EditUser = user;
-            var window = new Windows.UserInfoFields();
+            if (user == null) return;
+
+            SelectedUser = null;
+            //Services.Navigator.EditUser = user; попытка отказаться от холдера
+            var window = new Windows.UserInfoFields() // Создаём новое окно
+            {
+                DataContext = new UserInfoFieldsViewModel() // С соответствующей ViewModel в DataContext 
+                {
+                    CurrentUser = user // В ViewModel ставим пользователя, чьи поля хотим отредактировать
+                }
+            };
             window.ShowDialog();
             Context.SaveChanges();
             UpdateUserList(CurrentFilter);

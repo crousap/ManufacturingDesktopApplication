@@ -8,7 +8,7 @@ using DesktopApplication.DbModel;
 
 namespace DesktopApplication.ViewModels
 {
-    public class UserInfoFIeldsViewModel : ViewModelBase
+    public class UserInfoFieldsViewModel : ViewModelBase
     {
         public User CurrentUser;
         public string FirstName
@@ -53,9 +53,9 @@ namespace DesktopApplication.ViewModels
             get => CurrentUser.UserInfo.ResidentialAddress ?? "";
             set { CurrentUser.UserInfo.ResidentialAddress = value; OnPropertyChanged(nameof(ResidantialAddress)); }
         }
-        public UserInfoFIeldsViewModel()
+        public UserInfoFieldsViewModel()
         {
-            CurrentUser = Navigator.EditUser;
+            //CurrentUser = Navigator.EditUser;
         }
 
     }

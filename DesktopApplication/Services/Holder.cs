@@ -11,7 +11,7 @@ namespace DesktopApplication.Services
         public static Window Window;
         public static ShowUsersPage ShowUsersPage;
     }
-    enum EditMode
+    public enum EditMode
     {
         Add,
         Edit

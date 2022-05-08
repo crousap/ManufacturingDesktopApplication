@@ -72,7 +72,7 @@
             Grid.Row="1"
             HorizontalAlignment="Stretch"
             ItemsSource="{Binding Users}"
-            SelectedItem="{Binding CurrentUser}">
+            SelectedItem="{Binding SelectedUser}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="45">
