@@ -65,6 +65,10 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>-->
             </ComboBox>
+            <Button
+                Margin="10,0,0,0"
+                Command="{Binding AddUserCommand}"
+                Content="Добавить пользователя" />
         </StackPanel>
         <!--  Users List  -->
         <ListView

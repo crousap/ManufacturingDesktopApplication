@@ -84,7 +84,7 @@
             Name="buttonClose"
             Margin="10"
             VerticalAlignment="Bottom"
-            Click="buttonClose_Click"
+            Command="{Binding SaveChangesCommand}"
             Content="Записать" />
     </Grid>
 </Window>

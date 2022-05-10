@@ -98,7 +98,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AddUserCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\SaveChangesCommand.cs" />
     <Compile Include="Commands\TheButtonClicledCommand.cs" />
     <Compile Include="Services\Authorizator.cs" />
     <Compile Include="Services\Holder.cs" />

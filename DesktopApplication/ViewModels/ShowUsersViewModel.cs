@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using DesktopApplication.Commands;
 using DesktopApplication.DbModel;
 using DesktopApplication.Pages;
 
@@ -19,8 +21,6 @@ namespace DesktopApplication.ViewModels
         /// NoFilter роль кастыль, чтобы можно было снять фильтр.
         /// </summary>
         public readonly Role NoFilterRole;
-
-        public manufacturingEntities Context;
 
         private Role _currentFilter;
         /// <summary>
@@ -99,17 +99,19 @@ namespace DesktopApplication.ViewModels
             set { _roles = value; }
         }
 
+        public ICommand AddUserCommand { get; set; }
+
         public ShowUsersViewModel()
         {
-            Context = new manufacturingEntities();
+            UpdateUserList();
             NoFilterRole = new Role { Name = NoFilterCaption }; // Объявляем роль затычку
+            AddUserCommand = new AddUserCommand(this);
 
             PropertyChanged += OnSearchBarChanges; // Для отслеживания изменений в поисковой строке
-
-            Roles = Context.Roles.ToList();
+            using (var context = new manufacturingEntities())
+                Roles = context.Roles.ToList();
             Roles.Add(NoFilterRole); // Добавляем роль затычку в список для фильтра
             CurrentFilter = NoFilterRole;
-
             UpdateUserList();
         }
 
@@ -120,52 +122,63 @@ namespace DesktopApplication.ViewModels
         }
         public void UpdateUserList(Role filter = null)
         {
-            UpdateContext();
-            if (filter == null || filter.Name == NoFilterCaption)
+            using (var ctx = new manufacturingEntities())
             {
-                Users = Context.Users.Local;
-                return;
+                if (filter == null || filter.Name == NoFilterCaption)
+                {
+                    ctx.Users.Load();
+                    ctx.UserInfoes.Load();
+                    Users = ctx.Users.Local;
+                    return;
+                }
+                Users = ToObservableCollection(ctx.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name)));
             }
-            Users = ToObservableCollection(Context.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name)));
         }
         public void UpdateUserList(string query)
         {
-            UpdateContext();
-            if (string.IsNullOrEmpty(query))
-                UpdateUserList();
-            query = query.ToLower();
-            var results = from user in Context.Users.Local
-                          where (
-                              (user.UserInfo?.FirstName.ToLower().StartsWith(query) ?? false)
-                              || (user.UserInfo?.LastName.ToLower().StartsWith(query) ?? false)
-                              || (user.UserInfo?.MiddleName.ToLower().StartsWith(query) ?? false)
-                              || user.Login.ToLower().StartsWith(query))
-                          select user;
-            // Некоторые пользователи имеют только логин и пароль, но никакой персональной информации,
-            // т.е. объект UserInfo является null, поэтому применил выражение к поиску UserInfo? позваляет обращаться к null объектам и в итоге вернёт false
-            Users = ToObservableCollection(results);
+            using (var ctx = new manufacturingEntities())
+            {
+                if (string.IsNullOrEmpty(query))
+                    UpdateUserList();
+                query = query.ToLower();
+                var results = from user in ctx.Users.Local
+                              where (
+                                  (user.UserInfo?.FirstName.ToLower().StartsWith(query) ?? false)
+                                  || (user.UserInfo?.LastName.ToLower().StartsWith(query) ?? false)
+                                  || (user.UserInfo?.MiddleName.ToLower().StartsWith(query) ?? false)
+                                  || user.Login.ToLower().StartsWith(query))
+                              select user;
+                // Некоторые пользователи имеют только логин и пароль, но никакой персональной информации,
+                // т.е. объект UserInfo является null, поэтому применил выражение к поиску UserInfo? позваляет обращаться к null объектам и в итоге вернёт false
+                Users = ToObservableCollection(results);
+            }
         }
         private void UpdateContext()
         {
-            Context.Users.Load();
-            Context.UserInfoes.Load();
+            //Context.Users.Load();
+            //Context.UserInfoes.Load();
         }
         private void EditUserFields(User user)
         {
+            var ctx = new manufacturingEntities();
+            ctx.Users.Load();
+            ctx.UserInfoes.Load();
+            user = ctx.Users.Local.FirstOrDefault(usr => usr.Login.Equals(user?.Login));
             if (user == null) return;
-
-            SelectedUser = null;
             //Services.Navigator.EditUser = user; попытка отказаться от холдера
-            var window = new Windows.UserInfoFields() // Создаём новое окно
+            var window = new Windows.UserInfoFields(); // Создаём новое окно
+            
+            var viewModel = new UserInfoFieldsViewModel() // С соответствующей ViewModel в DataContext 
             {
-                DataContext = new UserInfoFieldsViewModel() // С соответствующей ViewModel в DataContext 
-                {
-                    CurrentUser = user // В ViewModel ставим пользователя, чьи поля хотим отредактировать
-                }
+                CurrentUser = user, // В ViewModel ставим пользователя, чьи поля хотим отредактировать
+                Context = ctx,
+                Window = window
             };
+            window.DataContext = viewModel;
             window.ShowDialog();
-            Context.SaveChanges();
+            //Context.SaveChanges();
             UpdateUserList(CurrentFilter);
+            SelectedUser = null;
         }
         public ObservableCollection<T> ToObservableCollection<T>(IEnumerable<T> enumeration)
         {
