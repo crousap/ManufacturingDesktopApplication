@@ -100,6 +100,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\AddUserCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\ProceedCommand.cs" />
     <Compile Include="Commands\SaveChangesCommand.cs" />
     <Compile Include="Commands\TheButtonClicledCommand.cs" />
     <Compile Include="Services\Authorizator.cs" />
@@ -169,11 +170,15 @@
       <DependentUpon>ShowUsersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Roles.cs" />
+    <Compile Include="ViewModels\LoginPasswordFieldsViewModel.cs" />
     <Compile Include="ViewModels\ManagerPageViewModel.cs" />
     <Compile Include="ViewModels\PagesHolderViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Windows\LoginPasswordFieldsView.xaml.cs">
+      <DependentUpon>LoginPasswordFieldsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PagesHolder.xaml.cs">
       <DependentUpon>PagesHolder.xaml</DependentUpon>
     </Compile>
@@ -198,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ShowUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginPasswordFieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

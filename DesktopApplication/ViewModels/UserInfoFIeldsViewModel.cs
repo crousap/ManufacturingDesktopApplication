@@ -13,6 +13,19 @@ namespace DesktopApplication.ViewModels
 {
     public class UserInfoFieldsViewModel : ViewModelBase
     {
+        private string _windowTitle;
+        public string WindowTitle
+        {
+            get
+            {
+                return _windowTitle;
+            }
+            set
+            {
+                _windowTitle = value;
+                OnPropertyChanged(nameof(WindowTitle));
+            }
+        }
         public User CurrentUser;
         public string FirstName
         {
@@ -26,9 +39,6 @@ namespace DesktopApplication.ViewModels
                 OnPropertyChanged(nameof(FirstName));
             }
         }
-
-
-
         public string LastName
         {
             get { return CurrentUser.UserInfo.LastName ?? ""; }
@@ -60,13 +70,26 @@ namespace DesktopApplication.ViewModels
             set { CurrentUser.UserInfo.ResidentialAddress = value; OnPropertyChanged(nameof(ResidantialAddress)); }
         }
         public ICommand SaveChangesCommand { get; set; }
-        public manufacturingEntities Context { get; internal set; }
-        public UserInfoFields Window { get; internal set; }
+        public manufacturingEntities Context { get; set; }
+        public UserInfoFields Window { get; set; }
+        /// <summary>
+        /// Конструктор ViewModel, для редактирования пользователя
+        /// </summary>
+        /// <param name="currentUser">Пользователь, чьи поля нужно редактировать</param>
+        /// <param name="context">Контекст, чтобы можно было сохранить результат в БД</param>
+        public UserInfoFieldsViewModel(User currentUser, manufacturingEntities context) : this()
+        {
+            Context = context;
+            CurrentUser = currentUser;
 
+            if (currentUser.UserInfo == null) // Когда у пользователя нет ничего кроме Логина и Пароля
+                currentUser.UserInfo = new UserInfo();
+
+            WindowTitle = $"Редактирование : {CurrentUser.Login}"; // Название окна
+        }
         public UserInfoFieldsViewModel()
         {
             SaveChangesCommand = new SaveChangesCommand(this);
-            //CurrentUser = Navigator.EditUser;
         }
         public void SaveChanges()
         {

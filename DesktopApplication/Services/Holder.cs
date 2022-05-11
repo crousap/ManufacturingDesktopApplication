@@ -10,6 +10,7 @@ namespace DesktopApplication.Services
         public static UserInfoView User;
         public static Window Window;
         public static ShowUsersPage ShowUsersPage;
+        public static bool Result;  
     }
     public enum EditMode
     {

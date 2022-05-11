@@ -11,13 +11,12 @@ namespace DesktopApplication.ViewModels
 {
     public class ManagerPageViewModel : ViewModelBase
     {
-        public TheButtonClicledCommand Button { get; set; }
+        public ICommand Button { get; set; }
         public ICommand LoadShowUsersPage { get; set; }
 
         public ManagerPageViewModel()
         {
             Button = new TheButtonClicledCommand(this);
-            
         }
 
         public void OnExecute()

@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
     xmlns:vr="clr-namespace:DesktopApplication.Services"
-    Title="UserInfoFields"
+    Title="{Binding WindowTitle}"
     Width="350"
     Height="650"
     Icon="pack://application:,,,/Resources/logo.png"

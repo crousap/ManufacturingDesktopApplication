@@ -1,5 +1,4 @@
 ﻿using DesktopApplication.ViewModels;
-using DesktopApplication.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +7,18 @@ using System.Threading.Tasks;
 
 namespace DesktopApplication.Commands
 {
-    public class AddUserCommand : CommandBase
+    public class ProceedCommand : CommandBase
     {
-        private ShowUsersViewModel showUsersViewModel;
+        private LoginPasswordFieldsViewModel ViewModel;
 
-        public AddUserCommand(ShowUsersViewModel showUsersViewModel)
+        public ProceedCommand(LoginPasswordFieldsViewModel loginPasswordFieldsViewModel)
         {
-            this.showUsersViewModel = showUsersViewModel;
+            this.ViewModel = loginPasswordFieldsViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            showUsersViewModel.AddNewUser();
+            ViewModel.Procced();
         }
-
     }
 }
