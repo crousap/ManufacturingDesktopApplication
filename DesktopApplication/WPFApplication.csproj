@@ -103,6 +103,12 @@
     <Compile Include="Commands\ProceedCommand.cs" />
     <Compile Include="Commands\SaveChangesCommand.cs" />
     <Compile Include="Commands\TheButtonClicledCommand.cs" />
+    <Compile Include="Pages\ShowStocks.xaml.cs">
+      <DependentUpon>ShowStocks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowWareHouses.xaml.cs">
+      <DependentUpon>ShowWareHouses.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\Authorizator.cs" />
     <Compile Include="Services\Holder.cs" />
     <Compile Include="Services\NotEmptyValidationRule.cs" />
@@ -174,6 +180,7 @@
     <Compile Include="ViewModels\ManagerPageViewModel.cs" />
     <Compile Include="ViewModels\PagesHolderViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
+    <Compile Include="ViewModels\ShowWarehousesViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Windows\LoginPasswordFieldsView.xaml.cs">
@@ -202,7 +209,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShowStocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ShowUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShowWareHouses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

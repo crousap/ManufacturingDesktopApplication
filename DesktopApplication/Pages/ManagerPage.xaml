@@ -25,6 +25,12 @@
                 Click="buttonShowUsers_Click"
                 Content="Список сотрудников" />
             <Button
+                Name="buttonShowWarehouses"
+                Margin="0,0,10,0"
+                Click="buttonShowWarehouses_Click"
+                Command="{Binding CheckWarehousesCommand}"
+                Content="Склады" />
+            <Button
                 Name="buttonShowProjects"
                 Command="{Binding Button}"
                 Content="Показать проекты" />
