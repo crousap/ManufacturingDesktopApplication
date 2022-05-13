@@ -130,7 +130,7 @@ namespace DesktopApplication.ViewModels
                     Users = ctx.Users.Local;
                     return;
                 }
-                Users = ToObservableCollection(ctx.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name.Trim())));
+                Users = ctx.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name.Trim())).ToObservableCollection();
             }
         }
         public void UpdateUserList(string query)
@@ -151,7 +151,7 @@ namespace DesktopApplication.ViewModels
                               select user;
                 // Некоторые пользователи имеют только логин и пароль, но никакой персональной информации,
                 // т.е. объект UserInfo является null, поэтому применил выражение к поиску UserInfo? позваляет обращаться к null объектам и в итоге вернёт false
-                Users = ToObservableCollection(results);
+                Users = results.ToObservableCollection();
             }
         }
 
@@ -207,10 +207,6 @@ namespace DesktopApplication.ViewModels
             userInfoFieldsView.ShowDialog();
             UpdateUserList(CurrentFilter);
             SelectedUser = null;
-        }
-        public ObservableCollection<T> ToObservableCollection<T>(IEnumerable<T> enumeration)
-        {
-            return new ObservableCollection<T>(enumeration);
         }
     }
 }

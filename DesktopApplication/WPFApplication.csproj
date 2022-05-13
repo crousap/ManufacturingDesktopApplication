@@ -110,6 +110,7 @@
       <DependentUpon>ShowWareHouses.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Authorizator.cs" />
+    <Compile Include="Services\Converter.cs" />
     <Compile Include="Services\Holder.cs" />
     <Compile Include="Services\NotEmptyValidationRule.cs" />
     <Compile Include="DbModel\Client.cs">
@@ -179,6 +180,8 @@
     <Compile Include="ViewModels\LoginPasswordFieldsViewModel.cs" />
     <Compile Include="ViewModels\ManagerPageViewModel.cs" />
     <Compile Include="ViewModels\PagesHolderViewModel.cs" />
+    <Compile Include="ViewModels\StockInfoFieldsViewModel.cs" />
+    <Compile Include="ViewModels\ShowStocksViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
     <Compile Include="ViewModels\ShowWarehousesViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
@@ -188,6 +191,9 @@
     </Compile>
     <Compile Include="Windows\PagesHolder.xaml.cs">
       <DependentUpon>PagesHolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StockInfoFields.xaml.cs">
+      <DependentUpon>StockInfoFields.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\UserInfoFields.xaml.cs">
       <DependentUpon>UserInfoFields.xaml</DependentUpon>
@@ -226,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PagesHolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StockInfoFields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

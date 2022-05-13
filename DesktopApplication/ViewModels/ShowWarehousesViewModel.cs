@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -13,36 +14,8 @@ namespace DesktopApplication.ViewModels
 {
     public class ShowWarehousesViewModel : ViewModelBase
     {
-        private Stock _stocks;
-        public Stock Stocks
-        {
-            get
-            {
-                return _stocks;
-            }
-            set
-            {
-                _stocks = value;
-                OnPropertyChanged(nameof(Stocks));
-            }
-        }
-
-        private Stock _selectedStock;
-        public Stock SelectedStock
-        {
-            get
-            {
-                return _selectedStock;
-            }
-            set
-            {
-                _selectedStock = value;
-                OnPropertyChanged(nameof(SelectedStock));
-            }
-        }
-
-        private List<Warehouse> _warehouses;
-        public List<Warehouse> Warehouses
+        private ObservableCollection<Warehouse> _warehouses;
+        public ObservableCollection<Warehouse> Warehouses
         {
             get
             {
@@ -56,6 +29,8 @@ namespace DesktopApplication.ViewModels
         }
 
         private Warehouse _selectedWarehouse;
+        public manufacturingEntities Context { get; set; }
+
         public Warehouse SelectedWarehouse
         {
             get
@@ -73,30 +48,36 @@ namespace DesktopApplication.ViewModels
         public ShowWarehousesViewModel()
         {
             PropertyChanged += SelectedWarehouseChanged;
-            using (var ctx = new manufacturingEntities())
+            Context = new manufacturingEntities();
+            if (Authorizator.CurrentRole == Roles.Менеджер) // Если пользователь является менеджером, то ему будет доступна информация о всех складах
             {
-                if (Authorizator.CurrentRole == Roles.Менеджер) // Если пользователь является менеджером, то ему будет доступна информация о всех складах
-                {
-                    Warehouses = ctx.Warehouses.ToList();
-                    return;
-                } // В противном случае пользователь будет складовщиком
-                ctx.Warehouses.Load();
-                // Отображать только те склады, к которым у пользователя есть доступ
-                Warehouses = ctx.Warehouses.Local.Where(wrh => wrh.Users.Contains(Authorizator.CurrentUser)).ToList();
-            }
+                Warehouses = Context.Warehouses.ToObservableCollection();
+                return;
+            } // В противном случае пользователь будет складовщиком
+            Context.Warehouses.Load();
+            // Отображать только те склады, к которым у пользователя есть доступ
+            Warehouses = Context.Warehouses.Local.Where(wrh => wrh.Users.Contains(Authorizator.CurrentUser)).ToObservableCollection();
         }
-
+        public ShowWarehousesViewModel(ShowWareHouses page) : this()
+        {
+            View = page;
+        }
+        /// <summary>
+        /// Случается, если пользователь выбирает 1 из складов из списка
+        /// </summary>
         private void SelectedWarehouseChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (!(e.PropertyName == nameof(SelectedWarehouse)))
                 return;
 
-            
+            var view = new ShowStocks();
+            var viewModel = new ShowStocksViewModel(view, SelectedWarehouse, this);
+            view.DataContext = viewModel;
+            View.frameShowStocks.Navigate(view);
+
+
         }
 
-        public ShowWarehousesViewModel(ShowWareHouses page) : this()
-        {
-            View = page;
-        }
+
     }
 }
