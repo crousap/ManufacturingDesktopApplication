@@ -91,7 +91,7 @@ namespace DesktopApplication.ViewModels
         {
             SaveChangesCommand = new SaveChangesCommand(this);
         }
-        public void SaveChanges()
+        public override void SaveChanges()
         {
             Context.SaveChanges();
             Window.Close();

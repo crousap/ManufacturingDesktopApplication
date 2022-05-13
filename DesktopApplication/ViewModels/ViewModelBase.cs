@@ -15,5 +15,14 @@ namespace DesktopApplication.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        /// <summary>
+        /// Нужно для реализации кнопки Сохранения записей.
+        /// <para>
+        ///     В таких ViewModel как <see cref="StockInfoFieldsViewModel"/> и <see cref="UserInfoFieldsViewModel"/>
+        /// </para>
+        /// </summary>
+        public virtual void SaveChanges() { }
+
     }
 }

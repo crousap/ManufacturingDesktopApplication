@@ -10,16 +10,16 @@ namespace DesktopApplication.Commands
 {
     public class SaveChangesCommand : CommandBase
     {
-        private UserInfoFieldsViewModel userInfoFieldsViewModel;
+        private ViewModelBase _viewModel;
 
-        public SaveChangesCommand(UserInfoFieldsViewModel userInfoFieldsViewModel)
+        public SaveChangesCommand(ViewModelBase viewModel)
         {
-            this.userInfoFieldsViewModel = userInfoFieldsViewModel;
+            _viewModel = viewModel;
         }
 
         public override void Execute(object parameter)
         {
-            userInfoFieldsViewModel.SaveChanges();
+            _viewModel.SaveChanges();
         }
     }
 }
