@@ -24,5 +24,10 @@ namespace DesktopApplication.Pages
         {
             InitializeComponent();
         }
+
+        private void DataGrid_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

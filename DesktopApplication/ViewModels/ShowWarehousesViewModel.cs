@@ -45,6 +45,7 @@ namespace DesktopApplication.ViewModels
         }
         public ShowWareHouses View { get; set; }
 
+        #region Constructors
         public ShowWarehousesViewModel()
         {
             PropertyChanged += SelectedWarehouseChanged;
@@ -55,13 +56,18 @@ namespace DesktopApplication.ViewModels
                 return;
             } // В противном случае пользователь будет складовщиком
             Context.Warehouses.Load();
+            Context.Users.Load();
+            Context.Warehouses.Load();
+            var user = Authorizator.UserInContext(Context);
             // Отображать только те склады, к которым у пользователя есть доступ
-            Warehouses = Context.Warehouses.Local.Where(wrh => wrh.Users.Contains(Authorizator.CurrentUser)).ToObservableCollection();
+            Warehouses = user.Warehouses.ToObservableCollection();
         }
         public ShowWarehousesViewModel(ShowWareHouses page) : this()
         {
             View = page;
-        }
+        } 
+        #endregion
+
         /// <summary>
         /// Случается, если пользователь выбирает 1 из складов из списка
         /// </summary>
@@ -71,7 +77,7 @@ namespace DesktopApplication.ViewModels
                 return;
 
             var view = new ShowStocks();
-            var viewModel = new ShowStocksViewModel(view, SelectedWarehouse, this);
+            var viewModel = new ShowStocksViewModel(view, this);
             view.DataContext = viewModel;
             View.frameShowStocks.Navigate(view);
 

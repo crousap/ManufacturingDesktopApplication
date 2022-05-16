@@ -58,8 +58,7 @@
                 IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
                 ItemsSource="{Binding Roles}"
                 SelectedItem="{Binding CurrentFilter}"
-                Style="{StaticResource MaterialDesignOutlinedComboBox}">
-            </ComboBox>
+                Style="{StaticResource MaterialDesignOutlinedComboBox}" />
             <Button
                 Margin="10,0,0,0"
                 Command="{Binding AddUserCommand}"
@@ -77,8 +76,8 @@
                     <Border CornerRadius="45">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <!--  Изображение (не работает) -->
-                                <Image
+                                <!--  Изображение (не работает)  -->
+                                <!--<Image
                                     Width="150"
                                     Height="150"
                                     Margin="5">
@@ -89,7 +88,7 @@
                                             </Binding.TargetNullValue>
                                         </Binding>
                                     </Image.Source>
-                                </Image>
+                                </Image>-->
                                 <StackPanel Margin="5" Orientation="Vertical">
                                     <TextBlock>
                                         <Run Text="{Binding Path=UserInfo.FirstName}" />
@@ -103,6 +102,13 @@
                                         <Run Text=" " />
                                         <Run Text="{Binding Role}" />
                                     </TextBlock>
+                                    <ListView ItemsSource="{Binding WarehouseDependecies}" SelectedItem="{Binding SelectedWarehouse}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding WarehouseIsChecked}" />
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

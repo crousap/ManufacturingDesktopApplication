@@ -18,30 +18,32 @@
         <!--  Frame  -->
         <Frame Name="frameShowStocks" Grid.Column="0" />
         <!--  Список складов  -->
-        <ListBox
-            Name="listBoxWareHouses"
+        <Border
+            Margin="0,0,-4,-4"
             Grid.Column="1"
-            ItemsSource="{Binding Warehouses}"
-            SelectedItem="{Binding SelectedWarehouse}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border CornerRadius="45">
-                        <Grid>
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Margin="5" Orientation="Vertical">
-                                    <TextBlock>
-                                        <Run Text="{Binding Id}" />
-                                        <Run Text=" | " />
-                                        <Run Text="{Binding Name}" />
-                                        <Run Text=" | " />
-                                        <Run Text="{Binding Ammount}" />
-                                    </TextBlock>
+            BorderBrush="{StaticResource MaterialDesignDivider}"
+            BorderThickness="5"
+            Style="{StaticResource MaterialDesignToolBarMainPanelBorderStyle}">
+            <ListBox
+                Name="listBoxWareHouses"
+                ItemsSource="{Binding Warehouses}"
+                SelectedItem="{Binding SelectedWarehouse}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" Margin="5">
+                                    <StackPanel Margin="5" Orientation="Vertical">
+                                        <TextBlock>
+                                            <Run Text="{Binding Id}" />
+                                            <Run Text=" | " />
+                                            <Run Text="{Binding Name}" />
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                            </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
     </Grid>
 </Page>

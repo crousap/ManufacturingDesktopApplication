@@ -103,11 +103,15 @@
     <Compile Include="Commands\ProceedCommand.cs" />
     <Compile Include="Commands\SaveChangesCommand.cs" />
     <Compile Include="Commands\TheButtonClicledCommand.cs" />
+    <Compile Include="Models\WarehouseDependency.cs" />
     <Compile Include="Pages\ShowStocks.xaml.cs">
       <DependentUpon>ShowStocks.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ShowWareHouses.xaml.cs">
       <DependentUpon>ShowWareHouses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WarehousemanPage.xaml.cs">
+      <DependentUpon>WarehousemanPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Authorizator.cs" />
     <Compile Include="Services\Converter.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="ViewModels\ShowWarehousesViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WarehousemanViewModel.cs" />
     <Compile Include="Windows\LoginPasswordFieldsView.xaml.cs">
       <DependentUpon>LoginPasswordFieldsView.xaml</DependentUpon>
     </Compile>
@@ -224,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ShowWareHouses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WarehousemanPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
