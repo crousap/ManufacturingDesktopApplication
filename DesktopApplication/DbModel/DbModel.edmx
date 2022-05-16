@@ -57,6 +57,7 @@
           <Property Name="Ammount" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="1000" />
           <Property Name="WarehouseId" Type="int" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -216,6 +217,18 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Workshop">
+          <End Role="Workshop" Type="Self.Workshop" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshop">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Stock">
@@ -384,6 +397,10 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
             <End Role="Warehouse" EntitySet="Warehouse" />
             <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
+          <AssociationSet Name="FK_Stock_Workshop" Association="Self.FK_Stock_Workshop">
+            <End Role="Workshop" EntitySet="Workshop" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
@@ -457,6 +474,8 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <Property Name="WarehouseId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Warehouse" Relationship="Self.FK_Stock_Warehouse" FromRole="Stock" ToRole="Warehouse" />
           <NavigationProperty Name="Orders" Relationship="Self.OrderStock" FromRole="Stock" ToRole="Order" />
+          <Property Name="Position" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Workshop" Relationship="manufacturingModel.FK_Stock_Workshop" FromRole="Stock" ToRole="Workshop" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -517,6 +536,7 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Users" Relationship="Self.UserWorkshop" FromRole="Workshop" ToRole="User" />
+          <NavigationProperty Name="Stocks" Relationship="manufacturingModel.FK_Stock_Workshop" FromRole="Workshop" ToRole="Stock" />
         </EntityType>
         <Association Name="FK_Contact_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
@@ -672,6 +692,10 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="UserInfoViews" EntityType="manufacturingModel.UserInfoView" />
+          <AssociationSet Name="FK_Stock_Workshop" Association="manufacturingModel.FK_Stock_Workshop">
+            <End Role="Workshop" EntitySet="Workshops" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="LoginChecker_Result">
           <Property Type="String" Name="Login" Nullable="false" MaxLength="150" />
@@ -733,6 +757,18 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="FK_Stock_Workshop">
+          <End Type="manufacturingModel.Workshop" Role="Workshop" Multiplicity="1" />
+          <End Type="manufacturingModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -772,6 +808,7 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="manufacturingModel.Stock">
               <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Ammount" ColumnName="Ammount" />

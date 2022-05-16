@@ -26,8 +26,6 @@ namespace DesktopApplication.DbModel
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        public static manufacturingEntities GetContext() => new manufacturingEntities();
     
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
