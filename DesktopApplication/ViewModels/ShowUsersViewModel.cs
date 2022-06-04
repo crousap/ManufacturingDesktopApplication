@@ -123,14 +123,14 @@ namespace DesktopApplication.ViewModels
         {
             using (var ctx = new manufacturingEntities())
             {
+                ctx.Users.Load();
+                ctx.UserInfoes.Load();
                 if (filter == null || filter.Name == NoFilterCaption)
                 {
-                    ctx.Users.Load();
-                    ctx.UserInfoes.Load();
                     Users = ctx.Users.Local;
                     return;
                 }
-                Users = ctx.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name.Trim())).ToObservableCollection();
+                Users = ctx.Users.Local.Where(user => user.Role.Contains(filter.Name.Trim())).ToObservableCollection();
             }
         }
         public void UpdateUserList(string query)
