@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesktopApplication.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,6 @@ namespace DesktopApplication.Pages
         public ShowStocks()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_LostFocus(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
