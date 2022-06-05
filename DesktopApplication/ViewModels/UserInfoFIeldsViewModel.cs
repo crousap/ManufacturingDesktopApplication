@@ -144,7 +144,7 @@ namespace DesktopApplication.ViewModels
             Context.Roles.Load();
             Context.Warehouses.Load();
 
-            Roles = Context.Roles.Local.ToList();
+            Roles = Context.Roles.Local.ToList(); // Роли для комбобокса
             WarehouseDependencies = (from wrh in Context.Warehouses.Local
                                      select new WarehouseDependency(wrh, CurrentUser, Context)).ToObservableCollection();
 
