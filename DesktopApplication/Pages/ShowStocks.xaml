@@ -43,6 +43,6 @@
                 <DataGridTextColumn Binding="{Binding Path=Description}" Header="Описание" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button  Grid.Row="2" Content="Добавить" HorizontalAlignment="Left"/>
+        <Button x:Name="ButtonAddStock"  Command="{Binding AddStockCommand}" Grid.Row="2" Content="Добавить" HorizontalAlignment="Left"/>
     </Grid>
 </Page>
