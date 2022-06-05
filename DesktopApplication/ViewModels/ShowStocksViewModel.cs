@@ -12,13 +12,13 @@ using DesktopApplication.Windows;
 using System.Collections.Specialized;
 using System.Windows.Input;
 using DesktopApplication.Commands;
+using System.Windows;
 
 namespace DesktopApplication.ViewModels
 {
     public class ShowStocksViewModel : ViewModelBase
     {
         private ObservableCollection<Stock> _stocks;
-
 
         public ObservableCollection<Stock> Stocks
         {
@@ -64,24 +64,34 @@ namespace DesktopApplication.ViewModels
         }
 
         public manufacturingEntities Context { get; set; }
+        /// <summary>
+        /// Та View, к которой принадлежит данная ViewModel
+        /// </summary>
         public Page View { get; private set; }
+        /// <summary>
+        /// Склад, предметы которого мы в данный момент просматриваем
+        /// </summary>
         public Warehouse CurrentWarehouse { get; private set; }
 
-        public ICommand LostFocusCommand { get; set; }
-        
+        public ICommand AddStockCommand { get; set; }
+        public ShowStocksViewModel()
+        {
+            AddStockCommand = new AddStockCommand(this);
+        }
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="viewModel">Экземпляр вызвавшего ViewModel</param>
         /// <param name="selectedWarehouse">Экземпляр склада, предметы которого нужно показать</param>
         /// <param name="view">View, к которой пр ивязана текущая ViewModel</param>
-        public ShowStocksViewModel(Page view, ShowWarehousesViewModel viewModel)
+        public ShowStocksViewModel(Page view, ShowWarehousesViewModel viewModel) : this()
         {
             View = view;
             CurrentWarehouse = viewModel.SelectedWarehouse;
             Context = viewModel.Context;
             UpdateStocks();
-        }    
+        }
+
         private void UpdateStocks()
         {
             Context.Stocks.Load();
@@ -105,6 +115,14 @@ namespace DesktopApplication.ViewModels
             Stocks = results.ToObservableCollection();
         }
 
-
+        public void AddStock()
+        {
+            var window = new StockInfoFields();
+            var viewModel = new ViewModels.StockInfoFieldsViewModel(window, CurrentWarehouse.Id);
+            window.DataContext = viewModel;
+            window.ShowDialog();
+            UpdateStocks();
+            SearchQuery = String.Empty;
+        }
     }
 }

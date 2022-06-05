@@ -36,7 +36,7 @@
             ItemsSource="{Binding Stocks, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedStock, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Id}" Header="Идентификатор" />
+                <DataGridTextColumn Binding="{Binding Path=Id}" Header="Идентификатор" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Path=Name}" Header="Наименование" />
                 <DataGridTextColumn Binding="{Binding Path=Ammount}" Header="Колличество" />
                 <DataGridTextColumn Binding="{Binding Path=Position}" Header="Расположение" />
