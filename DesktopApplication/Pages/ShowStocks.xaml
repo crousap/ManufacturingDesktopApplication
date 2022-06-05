@@ -15,11 +15,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="8*" />
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <!--  Search bar  -->
             <TextBox
-                Grid.Column="1"
                 MinWidth="250"
                 Margin="8,0,0,0"
                 VerticalAlignment="Center"
@@ -32,9 +32,9 @@
         <DataGrid
             Grid.Row="1"
             AutoGenerateColumns="False"
-            CanUserAddRows="True"
+            CanUserAddRows="False"
             ItemsSource="{Binding Stocks, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedStock, UpdateSourceTrigger=LostFocus, Mode=TwoWay, ValidatesOnDataErrors=True}">
+            SelectedItem="{Binding SelectedStock, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Id}" Header="Идентификатор" />
                 <DataGridTextColumn Binding="{Binding Path=Name}" Header="Наименование" />
@@ -43,5 +43,6 @@
                 <DataGridTextColumn Binding="{Binding Path=Description}" Header="Описание" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button  Grid.Row="2" Content="Добавить" HorizontalAlignment="Left"/>
     </Grid>
 </Page>
