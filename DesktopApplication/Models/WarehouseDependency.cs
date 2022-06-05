@@ -8,6 +8,9 @@ using DesktopApplication.ViewModels;
 
 namespace DesktopApplication.Models
 {
+    /// <summary>
+    /// Класс, помогающий различать, какой пользователь, к каком складу относится
+    /// </summary>
     public class WarehouseDependency : ViewModelBase
     {
         #region Fields
