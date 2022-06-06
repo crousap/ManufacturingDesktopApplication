@@ -98,7 +98,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AddStockCommand.cs" />
+    <Compile Include="Commands\AddUserCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\RemoveUserCommand.cs" />
+    <Compile Include="Commands\ProceedCommand.cs" />
+    <Compile Include="Commands\SaveChangesCommand.cs" />
+    <Compile Include="Commands\TheButtonClicledCommand.cs" />
+    <Compile Include="Models\WarehouseDependency.cs" />
+    <Compile Include="Pages\ShowStocks.xaml.cs">
+      <DependentUpon>ShowStocks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowWareHouses.xaml.cs">
+      <DependentUpon>ShowWareHouses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WarehousemanPage.xaml.cs">
+      <DependentUpon>WarehousemanPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\Authorizator.cs" />
+    <Compile Include="Services\Converter.cs" />
     <Compile Include="Services\Holder.cs" />
     <Compile Include="Services\NotEmptyValidationRule.cs" />
     <Compile Include="DbModel\Client.cs">
@@ -164,11 +182,25 @@
     <Compile Include="Pages\ShowUsersPage.xaml.cs">
       <DependentUpon>ShowUsersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\Roles.cs" />
+    <Compile Include="ViewModels\LoginPasswordFieldsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerPageViewModel.cs" />
+    <Compile Include="ViewModels\PagesHolderViewModel.cs" />
+    <Compile Include="ViewModels\StockInfoFieldsViewModel.cs" />
+    <Compile Include="ViewModels\ShowStocksViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
+    <Compile Include="ViewModels\ShowWarehousesViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WarehousemanViewModel.cs" />
+    <Compile Include="Windows\LoginPasswordFieldsView.xaml.cs">
+      <DependentUpon>LoginPasswordFieldsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PagesHolder.xaml.cs">
       <DependentUpon>PagesHolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StockInfoFields.xaml.cs">
+      <DependentUpon>StockInfoFields.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\UserInfoFields.xaml.cs">
       <DependentUpon>UserInfoFields.xaml</DependentUpon>
@@ -190,11 +222,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShowStocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ShowUsersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShowWareHouses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WarehousemanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginPasswordFieldsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\PagesHolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StockInfoFields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

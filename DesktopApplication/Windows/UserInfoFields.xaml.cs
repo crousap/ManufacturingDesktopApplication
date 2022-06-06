@@ -18,10 +18,5 @@ namespace DesktopApplication.Windows
         {
             InitializeComponent();
         }
-
-        private void buttonClose_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
     }
 }

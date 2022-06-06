@@ -25,9 +25,11 @@ namespace DesktopApplication.DbModel
         public int Ammount { get; set; }
         public string Description { get; set; }
         public int WarehouseId { get; set; }
+        public string Position { get; set; }
     
         public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual Workshop Workshop { get; set; }
     }
 }

@@ -8,25 +8,39 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
     xmlns:vr="clr-namespace:DesktopApplication.Services"
-    Title="UserInfoFields"
+    Title="{Binding WindowTitle}"
+    MinWidth="350"
     Width="350"
-    Height="650"
+    MinHeight="700"
+    Height="700"
     Icon="pack://application:,,,/Resources/logo.png"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
-    <Window.DataContext>
-        <vm:UserInfoFIeldsViewModel />
-    </Window.DataContext>
     <Grid Name="mainGrid">
         <StackPanel
-            Name="wrapper"
+            Name="Wrapper"
             Width="300"
-            Margin="10"
+            Margin="25"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             Orientation="Vertical">
+            <StackPanel Name="LoginPasswordPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox
+                    Width="100"
+                    Margin="0,0,10,0"
+                    materialDesign:HintAssist.Hint="Логин"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Login}" />
+                <TextBox
+                    Width="100"
+                    materialDesign:HintAssist.Hint="Пароль"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Password}" />
+            </StackPanel>
             <StackPanel
-                Name="infoPanel"
+                Name="UserInfoPanel"
                 Margin="10"
                 Orientation="Vertical">
                 <TextBox
@@ -57,7 +71,7 @@
                     SelectedDate="{Binding BirthDate}" />
             </StackPanel>
             <StackPanel
-                Name="contactPanel"
+                Name="UserContactPanel"
                 Margin="10"
                 Orientation="Vertical">
                 <TextBox
@@ -82,12 +96,43 @@
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding ResidantialAddress}" />
             </StackPanel>
+            <StackPanel
+                Name="WorkInfo"
+                Margin="10"
+                Orientation="Vertical">
+                <ComboBox
+                    materialDesign:HintAssist.Hint="Должность"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding Roles}"
+                    SelectedItem="{Binding SelectedRole}"
+                    Style="{StaticResource MaterialDesignComboBox}" />
+                <ListView ItemsSource="{Binding WarehouseDependencies}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsDepended}" />
+                                <TextBlock Text="{Binding Path=Warehouse.Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
         </StackPanel>
-        <Button
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button
+                Margin="0,0,10,0"
+            Command="{Binding RemoveUserCommand}"
+            Content="Удалить"/>
+            <Button
+                Margin="0,0,0,0"
             Name="buttonClose"
-            Margin="10"
-            VerticalAlignment="Bottom"
-            Click="buttonClose_Click"
+            Command="{Binding SaveChangesCommand}"
             Content="Записать" />
+        </StackPanel>
     </Grid>
 </Window>

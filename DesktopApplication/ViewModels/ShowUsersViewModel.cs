@@ -1,26 +1,25 @@
-﻿using System;
+﻿using DesktopApplication.Commands;
+using DesktopApplication.DbModel;
+using DesktopApplication.Services;
+using DesktopApplication.Windows;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using DesktopApplication.DbModel;
-using DesktopApplication.Pages;
+using System.Windows.Input;
 
 namespace DesktopApplication.ViewModels
 {
     public class ShowUsersViewModel : ViewModelBase
     {
         public const string NoFilterCaption = "Без фильтра";
+
         /// <summary>
         /// NoFilter роль кастыль, чтобы можно было снять фильтр.
         /// </summary>
         public readonly Role NoFilterRole;
-
-        public manufacturingEntities Context;
 
         private Role _currentFilter;
         /// <summary>
@@ -56,7 +55,7 @@ namespace DesktopApplication.ViewModels
                 OnPropertyChanged(nameof(Users));
             }
         }
-        
+
         private string _searchQuery;
         /// <summary>
         /// Поисковая строка
@@ -74,20 +73,20 @@ namespace DesktopApplication.ViewModels
             }
         }
 
-        private User _currentUser;
+        private User _selectedUser;
         /// <summary>
         /// Выбранный в данный момент пользователь из списка
         /// </summary>
-        public User CurrentUser
+        public User SelectedUser
         {
             get
             {
-                return _currentUser;
+                return _selectedUser;
             }
             set
             {
-                _currentUser = value;
-                OnPropertyChanged(nameof(CurrentUser));
+                _selectedUser = value;
+                OnPropertyChanged(nameof(SelectedUser));
                 EditUserFields(value);
             }
         }
@@ -99,17 +98,19 @@ namespace DesktopApplication.ViewModels
             set { _roles = value; }
         }
 
+        public ICommand AddUserCommand { get; set; }
+
         public ShowUsersViewModel()
         {
-            Context = new manufacturingEntities();
-            NoFilterRole = new Role { Name = NoFilterCaption };
+            UpdateUserList();
+            NoFilterRole = new Role { Name = NoFilterCaption }; // Объявляем роль затычку
+            AddUserCommand = new AddUserCommand(this);
 
             PropertyChanged += OnSearchBarChanges; // Для отслеживания изменений в поисковой строке
-
-            Roles = Context.Roles.ToList();
+            using (var context = new manufacturingEntities())
+                Roles = context.Roles.ToList();
             Roles.Add(NoFilterRole); // Добавляем роль затычку в список для фильтра
             CurrentFilter = NoFilterRole;
-
             UpdateUserList();
         }
 
@@ -120,47 +121,92 @@ namespace DesktopApplication.ViewModels
         }
         public void UpdateUserList(Role filter = null)
         {
-            UpdateContext();
-            if (filter == null || filter.Name == NoFilterCaption)
+            using (var ctx = new manufacturingEntities())
             {
-                Users = Context.Users.Local;
-                return;
+                ctx.Users.Load();
+                ctx.UserInfoes.Load();
+                if (filter == null || filter.Name == NoFilterCaption)
+                {
+                    Users = ctx.Users.Local;
+                    return;
+                }
+                Users = ctx.Users.Local.Where(user => user.Role.Contains(filter.Name.Trim())).ToObservableCollection();
             }
-            Users = ToObservableCollection(Context.Users.Local.Where(user => user.Role.Equals(CurrentFilter.Name)));
         }
         public void UpdateUserList(string query)
         {
-            UpdateContext();
-            if (string.IsNullOrEmpty(query))
-                UpdateUserList();
-            query = query.ToLower();
-            var results = from user in Users
-                          where (
-                              (user.UserInfo?.FirstName.ToLower().StartsWith(query) ?? false)
-                              || (user.UserInfo?.LastName.ToLower().StartsWith(query) ?? false)
-                              || (user.UserInfo?.MiddleName.ToLower().StartsWith(query) ?? false)
-                              || user.Login.ToLower().StartsWith(query))
-                          select user;
-            // Некоторые пользователи имеют только логин и пароль, но никакой персональной информации,
-            // т.е. объект UserInfo является null, поэтому применил выражение к поиску UserInfo? позваляет обращаться к null объектам и в итоге вернёт false
-            Users = ToObservableCollection(results);
+            using (var ctx = new manufacturingEntities())
+            {
+                ctx.Users.Load();
+                ctx.UserInfoes.Load();
+                if (string.IsNullOrEmpty(query))
+                    UpdateUserList(CurrentFilter);
+                query = query.ToLower();
+                var results = from user in ctx.Users.Local
+                              where (
+                                  (user.UserInfo?.FirstName.ToLower().StartsWith(query) ?? false)
+                                  || (user.UserInfo?.LastName.ToLower().StartsWith(query) ?? false)
+                                  || (user.UserInfo?.MiddleName.ToLower().StartsWith(query) ?? false)
+                                  || user.Login.ToLower().StartsWith(query))
+                              select user;
+                // Некоторые пользователи имеют только логин и пароль, но никакой персональной информации,
+                // т.е. объект UserInfo является null, поэтому применил выражение к поиску UserInfo? позваляет обращаться к null объектам и в итоге вернёт false
+                Users = results.ToObservableCollection();
+            }
         }
-        private void UpdateContext()
-        {
-            Context.Users.Load();
-            Context.UserInfoes.Load();
-        }
+
         private void EditUserFields(User user)
         {
-            Services.Navigator.EditUser = user;
-            var window = new Windows.UserInfoFields();
+            var ctx = new manufacturingEntities();
+            ctx.Users.Load();
+            ctx.UserInfoes.Load();
+            user = ctx.Users.Local.FirstOrDefault(usr => usr.Login.Equals(user?.Login));
+            if (user == null) return;
+            var window = new UserInfoFields(); // Создаём новое окно
+
+            var viewModel = new UserInfoFieldsViewModel(user, ctx) // С соответствующей ViewModel в DataContext 
+            {
+                Window = window
+            };
+            window.DataContext = viewModel;
             window.ShowDialog();
-            Context.SaveChanges();
             UpdateUserList(CurrentFilter);
+            SelectedUser = null;
         }
-        public ObservableCollection<T> ToObservableCollection<T>(IEnumerable<T> enumeration)
+        public void AddNewUser()
         {
-            return new ObservableCollection<T>(enumeration);
+            User newUser = new User();
+
+            var ctx = new manufacturingEntities(); // Загружаем контекст
+
+            ctx.Users.Load();
+            ctx.Roles.Load();
+
+            var window = new LoginPasswordFieldsView();
+            var viewModel = new LoginPasswordFieldsViewModel()
+            {
+                User = newUser,
+                Window = window
+            };
+            window.DataContext = viewModel;
+            window.ShowDialog();
+            ctx.Users.Add(newUser);
+            if (Holder.Result == false)
+                return;
+            ctx.SaveChanges();
+            ctx.Users.Load();
+
+            User userIn = ctx.Users.Local.FirstOrDefault(usr => usr.Login.Equals(newUser?.Login));
+
+            var userInfoFieldsView = new UserInfoFields();
+            var userInfoFieldsViewModel = new UserInfoFieldsViewModel(userIn, ctx)
+            {
+                Window = userInfoFieldsView
+            };
+            userInfoFieldsView.DataContext = userInfoFieldsViewModel;
+            userInfoFieldsView.ShowDialog();
+            UpdateUserList(CurrentFilter);
+            SelectedUser = null;
         }
     }
 }

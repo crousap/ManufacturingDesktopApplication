@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DesktopApplication.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -16,6 +16,13 @@ namespace DesktopApplication.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public virtual void Dispose() { }
+        /// <summary>
+        /// Нужно для реализации кнопки Сохранения записей.
+        /// <para>
+        ///     В таких ViewModel как <see cref="StockInfoFieldsViewModel"/> и <see cref="UserInfoFieldsViewModel"/>
+        /// </para>
+        /// </summary>
+        public virtual void SaveChanges() { }
+
     }
 }

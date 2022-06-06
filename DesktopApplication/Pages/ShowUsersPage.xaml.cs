@@ -15,18 +15,9 @@ namespace DesktopApplication.Pages
     /// </summary>
     public partial class ShowUsersPage : Page
     {
-        
-
         public ShowUsersPage()
         {
             InitializeComponent();
         }
-
-        private void textBoxSearchBar_KeyDown(object sender, KeyEventArgs e)
-        {
-            //var query = textBoxSearchBar.Text.Trim();
-            //listViewUsers.ItemsSource = SearchBy(query);      
-        }
-
     }
 }

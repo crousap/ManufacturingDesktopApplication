@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DesktopApplication.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DesktopApplication.Pages
@@ -17,6 +18,14 @@ namespace DesktopApplication.Pages
         {
             frameManagerPage.Navigate(new ShowUsersPage());
             this.Title = Services.Authorizator.CurrentUser.Role;
+        }
+
+        private void buttonShowWarehouses_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new ShowWareHouses();
+            var viewModel = new ShowWarehousesViewModel(view);
+            view.DataContext = viewModel;
+            frameManagerPage.Navigate(view);
         }
     }
 }
