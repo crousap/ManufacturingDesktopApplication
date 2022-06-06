@@ -105,7 +105,6 @@
     <Compile Include="Commands\RemoveUserCommand.cs" />
     <Compile Include="Commands\ProceedCommand.cs" />
     <Compile Include="Commands\SaveChangesCommand.cs" />
-    <Compile Include="Commands\TheButtonClicledCommand.cs" />
     <Compile Include="Models\WarehouseDependency.cs" />
     <Compile Include="Pages\ShowStocks.xaml.cs">
       <DependentUpon>ShowStocks.xaml</DependentUpon>

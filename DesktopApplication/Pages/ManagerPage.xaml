@@ -30,9 +30,8 @@
                 Click="buttonShowWarehouses_Click"
                 Content="Склады" />
             <Button
-                Name="buttonShowProjects"
-                Command="{Binding Button}"
-                Content="Показать проекты" />
+                Name="buttonShowContacts"
+                Content="Список контактов" />
         </StackPanel>
         <Frame
             Name="frameManagerPage"

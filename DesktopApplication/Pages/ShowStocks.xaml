@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="8*" />
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <!--  Search bar  -->
@@ -36,16 +36,29 @@
             ItemsSource="{Binding Stocks, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedStock, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Id}" Header="Идентификатор" IsReadOnly="True"/>
+                <DataGridTextColumn
+                    Binding="{Binding Path=Id}"
+                    Header="Идентификатор"
+                    IsReadOnly="True" />
                 <DataGridTextColumn Binding="{Binding Path=Name}" Header="Наименование" />
                 <DataGridTextColumn Binding="{Binding Path=Ammount}" Header="Колличество" />
                 <DataGridTextColumn Binding="{Binding Path=Position}" Header="Расположение" />
                 <DataGridTextColumn Binding="{Binding Path=Description}" Header="Описание" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button x:Name="ButtonAddStock"  Command="{Binding AddStockCommand}" Content="Добавить" Margin="5,0,10,0"/>
-            <Button Command="{Binding RemoveStockCommand}" Grid.Row="2" Content="Удалить"/>
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal">
+            <Button
+                x:Name="ButtonAddStock"
+                Margin="5,0,10,0"
+                Command="{Binding AddStockCommand}"
+                Content="Добавить" />
+            <Button
+                Grid.Row="2"
+                Command="{Binding RemoveStockCommand}"
+                Content="Удалить" />
         </StackPanel>
     </Grid>
 </Page>

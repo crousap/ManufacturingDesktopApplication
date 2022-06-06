@@ -11,16 +11,8 @@ namespace DesktopApplication.ViewModels
 {
     public class ManagerPageViewModel : ViewModelBase
     {
-        public ICommand Button { get; set; }
-
         public ManagerPageViewModel()
         {
-            Button = new TheButtonClicledCommand(this); // test (можно удалить)
-        }
-
-        public void OnExecute()
-        {
-            MessageBox.Show("Я нажатая");
         }
     }
 }
