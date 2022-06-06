@@ -121,6 +121,7 @@ namespace DesktopApplication.ViewModels
         public ObservableCollection<WarehouseDependency> WarehouseDependencies { get; set; }
 
         public ICommand SaveChangesCommand { get; set; }
+        public ICommand RemoveUserCommand { get; set; }
         /// <summary>
         /// Контекст, который передаётся из вызвавшего ViewModel
         /// </summary>
@@ -156,6 +157,7 @@ namespace DesktopApplication.ViewModels
         public UserInfoFieldsViewModel()
         {
             SaveChangesCommand = new SaveChangesCommand(this);
+            RemoveUserCommand = new Commands.RemoveUserCommand(this);
         }
         #endregion
         public override void SaveChanges()
@@ -163,6 +165,11 @@ namespace DesktopApplication.ViewModels
             Context.SaveChanges();
             Window.Close();
             Context.Dispose();
+        }
+        public void RemoveUser()
+        {
+            Context.Users.Remove(CurrentUser);
+            SaveChanges();
         }
     }
 }

@@ -61,11 +61,11 @@ namespace DesktopApplication.ViewModels
 
         public override void SaveChanges()
         {
-            _newStock.WarehouseId = _currentWarehouseId;
-            _context.Stocks.Add(_newStock);
-            _context.SaveChanges();
-            _window.Close();
-            _context.Dispose();
+                _newStock.WarehouseId = _currentWarehouseId;
+                _context.Stocks.Add(_newStock);
+                _context.SaveChanges();
+                _window.Close();
+                _context.Dispose();
         }
     }
 }

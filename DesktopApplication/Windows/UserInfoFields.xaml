@@ -123,11 +123,16 @@
                 </ListView>
             </StackPanel>
         </StackPanel>
-        <Button
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button
+                Margin="0,0,10,0"
+            Command="{Binding RemoveUserCommand}"
+            Content="Удалить"/>
+            <Button
+                Margin="0,0,0,0"
             Name="buttonClose"
-            Margin="0,10"
-            VerticalAlignment="Bottom"
             Command="{Binding SaveChangesCommand}"
             Content="Записать" />
+        </StackPanel>
     </Grid>
 </Window>

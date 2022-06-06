@@ -64,6 +64,9 @@ namespace DesktopApplication.ViewModels
         }
 
         public manufacturingEntities Context { get; set; }
+        /// <summary>
+        /// Та View, к которой принадлежит данная ViewModel
+        /// </summary>
         public Page View { get; private set; }
         /// <summary>
         /// Склад, предметы которого мы в данный момент просматриваем
