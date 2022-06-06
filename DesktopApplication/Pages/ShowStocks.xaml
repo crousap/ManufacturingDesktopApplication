@@ -43,6 +43,9 @@
                 <DataGridTextColumn Binding="{Binding Path=Description}" Header="Описание" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="ButtonAddStock"  Command="{Binding AddStockCommand}" Grid.Row="2" Content="Добавить" HorizontalAlignment="Left"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button x:Name="ButtonAddStock"  Command="{Binding AddStockCommand}" Content="Добавить" Margin="5,0,10,0"/>
+            <Button Command="{Binding RemoveStockCommand}" Grid.Row="2" Content="Удалить"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -101,6 +101,7 @@
     <Compile Include="Commands\AddStockCommand.cs" />
     <Compile Include="Commands\AddUserCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\RemoveStockCommand.cs" />
     <Compile Include="Commands\RemoveUserCommand.cs" />
     <Compile Include="Commands\ProceedCommand.cs" />
     <Compile Include="Commands\SaveChangesCommand.cs" />

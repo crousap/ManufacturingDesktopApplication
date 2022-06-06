@@ -74,9 +74,13 @@ namespace DesktopApplication.ViewModels
         public Warehouse CurrentWarehouse { get; private set; }
 
         public ICommand AddStockCommand { get; set; }
+        public ICommand RemoveStockCommand { get; set; }
+
+        #region Конструкторы
         public ShowStocksViewModel()
         {
             AddStockCommand = new AddStockCommand(this);
+            RemoveStockCommand = new RemoveStockCommand(this);
         }
         /// <summary>
         /// Конструктор
@@ -92,6 +96,7 @@ namespace DesktopApplication.ViewModels
             UpdateStocks();
         }
 
+        #endregion
         private void UpdateStocks()
         {
             Context.Stocks.Load();
@@ -123,6 +128,13 @@ namespace DesktopApplication.ViewModels
             window.ShowDialog();
             UpdateStocks();
             SearchQuery = String.Empty;
+        }
+
+        public void RemoveStock()
+        {
+            Context.Stocks.Remove(SelectedStock);
+            Context.SaveChanges();
+            UpdateStocks();
         }
     }
 }
