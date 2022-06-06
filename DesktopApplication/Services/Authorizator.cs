@@ -44,6 +44,13 @@ namespace DesktopApplication.Services
             }
             return IsAuthorized;
         }
+        public static void LogOff()
+        {
+            _currentUser = null;
+            _currentRole = Roles.Неавторизированный;
+            _isAuthorized = false;
+        }
+
         /// <param name="user">Пользователь, которого нужно найти в контексте</param>
         /// <param name="context">Контекст, в котором нужно искать</param>
         /// <returns>Пользователя в контексте</returns>
