@@ -56,11 +56,23 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.5.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.5\lib\net452\MaterialDesignColors.dll</HintPath>
@@ -80,6 +92,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -106,6 +121,12 @@
     <Compile Include="Commands\ProceedCommand.cs" />
     <Compile Include="Commands\SaveChangesCommand.cs" />
     <Compile Include="Models\WarehouseDependency.cs" />
+    <Compile Include="Pages\ShowClientsPage.xaml.cs">
+      <DependentUpon>ShowClientsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowContactsPage.xaml.cs">
+      <DependentUpon>ShowContactsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ShowStocks.xaml.cs">
       <DependentUpon>ShowStocks.xaml</DependentUpon>
     </Compile>
@@ -183,9 +204,11 @@
       <DependentUpon>ShowUsersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Roles.cs" />
+    <Compile Include="ViewModels\ClientInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\LoginPasswordFieldsViewModel.cs" />
     <Compile Include="ViewModels\ManagerPageViewModel.cs" />
     <Compile Include="ViewModels\PagesHolderViewModel.cs" />
+    <Compile Include="ViewModels\ShowClientsViewModel.cs" />
     <Compile Include="ViewModels\StockInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\ShowStocksViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
@@ -193,6 +216,9 @@
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WarehousemanViewModel.cs" />
+    <Compile Include="Windows\ClientInfoFields.xaml.cs">
+      <DependentUpon>ClientInfoFields.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LoginPasswordFieldsView.xaml.cs">
       <DependentUpon>LoginPasswordFieldsView.xaml</DependentUpon>
     </Compile>
@@ -222,6 +248,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShowClientsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShowContactsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ShowStocks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WarehousemanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClientInfoFields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

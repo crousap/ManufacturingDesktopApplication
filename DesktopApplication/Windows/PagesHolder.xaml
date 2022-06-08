@@ -19,10 +19,17 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button x:Name="ButtonLogOff" HorizontalAlignment="Right" Content="Выйти" Click="ButtonLogOff_Click"/>
-        <Frame Name="frameMain" NavigationUIVisibility="Hidden" Grid.Row="1"/>
+        <Button
+            x:Name="ButtonLogOff"
+            HorizontalAlignment="Right"
+            Click="ButtonLogOff_Click"
+            Content="Выйти" />
+        <Frame
+            Name="frameMain"
+            Grid.Row="1"
+            NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

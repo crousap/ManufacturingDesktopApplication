@@ -30,8 +30,9 @@
                 Click="buttonShowWarehouses_Click"
                 Content="Склады" />
             <Button
-                Name="buttonShowContacts"
-                Content="Список контактов" />
+                Name="buttonShowClients"
+                Click="buttonShowClients_Click"
+                Content="Список клиентов" />
         </StackPanel>
         <Frame
             Name="frameManagerPage"

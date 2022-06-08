@@ -27,5 +27,14 @@ namespace DesktopApplication.Pages
             view.DataContext = viewModel;
             frameManagerPage.Navigate(view);
         }
+
+        private void buttonShowClients_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new ShowClientsPage();
+            var viewModel = new ShowClientsViewModel(view);
+            view.DataContext = viewModel;
+            frameManagerPage.Navigate(view);
+
+        }
     }
 }
