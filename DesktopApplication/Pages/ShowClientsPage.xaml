@@ -22,10 +22,10 @@
             SelectedItem="{Binding SelectedClient}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
                         <TextBlock>
                             <Run Text="{Binding Path=Id}" />
-                            <Run Text=" " />
+                            <Run Text=": " />
                             <Run Text="{Binding Path=Name}" />
                         </TextBlock>
                         <TextBlock Text="{Binding Path=Description}" />
@@ -36,6 +36,7 @@
         <!--  Кнопки  -->
         <StackPanel
             Grid.Row="1"
+            Margin="0,0,0,10"
             VerticalAlignment="Bottom"
             Orientation="Horizontal">
             <Button
@@ -43,10 +44,6 @@
                 Margin="5,0,10,0"
                 Command="{Binding AddClientCommand}"
                 Content="Добавить" />
-            <Button
-                x:Name="ButtonRemoveClient"
-                Command="{Binding RemoveClientCommand}"
-                Content="Удалить" />
         </StackPanel>
     </Grid>
 </Page>

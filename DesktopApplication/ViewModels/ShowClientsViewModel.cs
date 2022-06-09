@@ -57,13 +57,11 @@ namespace DesktopApplication.ViewModels
         }
         #endregion
         public ICommand AddClientCommand { get; set; }
-        public ICommand RemoveClientCommand { get; set; }
         #endregion
         #region Constructors
         public ShowClientsViewModel()
         {
             AddClientCommand = new RelayCommand(() => AddClient("AddClientButton"));
-            RemoveClientCommand = new RelayCommand(() => RemoveClient("RemoveClientButton"));
 
             _context = new manufacturingEntities();
             UpdateClientsList();
@@ -81,11 +79,7 @@ namespace DesktopApplication.ViewModels
             var viewModel = new ClientInfoFieldsViewModel(newClient, _context, view);
             view.DataContext = viewModel;
             view.ShowDialog();
-
-        }
-        public void RemoveClient(object sender)
-        {
-
+            UpdateClientsList();
         }
         private void UpdateClientsList()
         {
@@ -95,10 +89,14 @@ namespace DesktopApplication.ViewModels
         }
         private void EditClientFields(Client client)
         {
+            if (client == null)
+                return;
             var view = new Windows.ClientInfoFields();
             var viewModel = new ClientInfoFieldsViewModel(client, _context, view);
             view.DataContext = viewModel;
             view.ShowDialog();
+            SelectedClient = null;
+            UpdateClientsList();
         }
     }
 }

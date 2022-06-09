@@ -4,20 +4,73 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DesktopApplication.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ShowContactsPage">
 
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <ListView>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <StackPanel Name="topToolPannel" Orientation="Horizontal">
+            <materialDesign:ColorZone
+                Margin="10,5,0,5"
+                Padding="8,4,8,4"
+                VerticalAlignment="Center"
+                Panel.ZIndex="1"
+                materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                CornerRadius="2"
+                Mode="Standard">
+                    <!--  Search bar  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="1"
+                        MinWidth="250"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Поиск"
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                        BorderThickness="0"
+                        Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+            </materialDesign:ColorZone>
+            <Button
+                Margin="10,0,0,0"
+                Command="{Binding AddContactCommand}"
+                Content="Добавить контакт" />
         </StackPanel>
+        <!--  Contacts List  -->
+        <ListView
+            Name="listViewUsers"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding Contacts}"
+            SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="45">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Margin="5" Orientation="Vertical">
+                                    <TextBlock>
+                                        <Run Text="{Binding Path=Contact1}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding Path=Description}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

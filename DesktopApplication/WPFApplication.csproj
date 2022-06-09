@@ -205,10 +205,12 @@
     </Compile>
     <Compile Include="Services\Roles.cs" />
     <Compile Include="ViewModels\ClientInfoFieldsViewModel.cs" />
+    <Compile Include="ViewModels\ContactInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\LoginPasswordFieldsViewModel.cs" />
     <Compile Include="ViewModels\ManagerPageViewModel.cs" />
     <Compile Include="ViewModels\PagesHolderViewModel.cs" />
     <Compile Include="ViewModels\ShowClientsViewModel.cs" />
+    <Compile Include="ViewModels\ShowContactsViewModel.cs" />
     <Compile Include="ViewModels\StockInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\ShowStocksViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
@@ -218,6 +220,9 @@
     <Compile Include="ViewModels\WarehousemanViewModel.cs" />
     <Compile Include="Windows\ClientInfoFields.xaml.cs">
       <DependentUpon>ClientInfoFields.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ContactInfoFields.xaml.cs">
+      <DependentUpon>ContactInfoFields.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\LoginPasswordFieldsView.xaml.cs">
       <DependentUpon>LoginPasswordFieldsView.xaml</DependentUpon>
@@ -273,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ClientInfoFields.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ContactInfoFields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

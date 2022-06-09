@@ -29,13 +29,13 @@
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
                 CornerRadius="2"
                 Mode="Standard">
+                    <!--  Search bar  -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <!--  Search bar  -->
                     <TextBox
                         x:Name="textBoxSearchBar"
                         Grid.Column="1"
@@ -53,7 +53,7 @@
                 x:Name="comboBoxFilter"
                 Width="250"
                 Margin="10,2.5,0,2.5"
-                materialDesign:HintAssist.Hint="Some item"
+                materialDesign:HintAssist.Hint="Фильтр"
                 DisplayMemberPath="Name"
                 IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
                 ItemsSource="{Binding Roles}"
@@ -76,19 +76,6 @@
                     <Border CornerRadius="45">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <!--  Изображение (не работает)  -->
-                                <!--<Image
-                                    Width="150"
-                                    Height="150"
-                                    Margin="5">
-                                    <Image.Source>
-                                        <Binding>
-                                            <Binding.TargetNullValue>
-                                                <ImageSource>/Resources/picture.png</ImageSource>
-                                            </Binding.TargetNullValue>
-                                        </Binding>
-                                    </Image.Source>
-                                </Image>-->
                                 <StackPanel Margin="5" Orientation="Vertical">
                                     <TextBlock>
                                         <Run Text="{Binding Path=UserInfo.FirstName}" />

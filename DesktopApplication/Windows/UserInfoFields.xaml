@@ -9,10 +9,10 @@
     xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
     xmlns:vr="clr-namespace:DesktopApplication.Services"
     Title="{Binding WindowTitle}"
-    MinWidth="350"
     Width="350"
-    MinHeight="700"
     Height="700"
+    MinWidth="350"
+    MinHeight="700"
     Icon="pack://application:,,,/Resources/logo.png"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
@@ -24,7 +24,10 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Orientation="Vertical">
-            <StackPanel Name="LoginPasswordPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel
+                Name="LoginPasswordPanel"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
                 <TextBox
                     Width="100"
                     Margin="0,0,10,0"
@@ -123,16 +126,20 @@
                 </ListView>
             </StackPanel>
         </StackPanel>
-        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+        <StackPanel
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
             <Button
                 Margin="0,0,10,0"
-            Command="{Binding RemoveUserCommand}"
-            Content="Удалить"/>
+                Command="{Binding RemoveUserCommand}"
+                Content="Удалить" />
             <Button
+                Name="buttonClose"
                 Margin="0,0,0,0"
-            Name="buttonClose"
-            Command="{Binding SaveChangesCommand}"
-            Content="Записать" />
+                Command="{Binding SaveChangesCommand}"
+                Content="Записать" />
         </StackPanel>
     </Grid>
 </Window>
