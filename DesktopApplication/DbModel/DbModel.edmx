@@ -47,6 +47,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="ProjectStock">
           <Key>
@@ -880,6 +881,7 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Stocks" Relationship="manufacturingModel.ProjectStock" FromRole="Project" ToRole="Stock" />
           <NavigationProperty Name="Users" Relationship="manufacturingModel.ProjectUser" FromRole="Project" ToRole="User" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="ProjectStock">
           <End Type="manufacturingModel.Project" Role="Project" Multiplicity="*" />
@@ -1079,6 +1081,7 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="manufacturingModel.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

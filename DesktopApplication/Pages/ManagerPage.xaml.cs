@@ -36,5 +36,13 @@ namespace DesktopApplication.Pages
             frameManagerPage.Navigate(view);
 
         }
+
+        private void ButtonShowProjects_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new ShowProjectsPage();
+            var viewModel = new ShowProjectsViewModel(view);
+            view.DataContext = viewModel;
+            frameManagerPage.Navigate(view);
+        }
     }
 }

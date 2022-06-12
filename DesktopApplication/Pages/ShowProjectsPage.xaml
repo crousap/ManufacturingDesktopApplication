@@ -1,20 +1,16 @@
 ﻿<Page
-    x:Class="DesktopApplication.Pages.ShowUsersPage"
+    x:Class="DesktopApplication.Pages.ShowProjectsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:DesktopApplication.Pages"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:local="clr-namespace:DesktopApplication.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:DesktopApplication.ViewModels"
-    Title="ShowUsersPage"
+    Title="ShowProjectsPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     mc:Ignorable="d">
-    <Page.DataContext>
-        <vm:ShowUsersViewModel />
-    </Page.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
@@ -37,7 +33,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        x:Name="textBoxSearchBar"
+                        x:Name="TextBoxSearchBar"
                         Grid.Column="1"
                         MinWidth="250"
                         Margin="8,0,0,0"
@@ -56,21 +52,21 @@
                 materialDesign:HintAssist.Hint="Фильтр"
                 DisplayMemberPath="Name"
                 IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
-                ItemsSource="{Binding Roles}"
+                ItemsSource="{Binding Statuses}"
                 SelectedItem="{Binding CurrentFilter}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
             <Button
                 Margin="10,0,0,0"
-                Command="{Binding AddUserCommand}"
-                Content="Добавить пользователя" />
+                Command="{Binding AddNewProjectCommand}"
+                Content="Новый проект" />
         </StackPanel>
         <!--  Users List  -->
         <ListView
             Name="listViewUsers"
             Grid.Row="1"
             HorizontalAlignment="Stretch"
-            ItemsSource="{Binding Users}"
-            SelectedItem="{Binding SelectedUser}">
+            ItemsSource="{Binding Projects}"
+            SelectedItem="{Binding SelectedProject}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="45">
@@ -78,17 +74,11 @@
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Margin="5" Orientation="Vertical">
                                     <TextBlock>
-                                        <Run Text="{Binding Path=UserInfo.FirstName}" />
-                                        <Run Text=" " />
-                                        <Run Text="{Binding Path=UserInfo.LastName}" />
-                                        <Run Text=" " />
-                                        <Run Text="{Binding Path=UserInfo.MiddleName}" />
+                                        <Run Text="{Binding Path=Name}" FontWeight="Bold"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding Path=Status}"/>
                                     </TextBlock>
-                                    <TextBlock>
-                                        <Run Text="{Binding Login}" />
-                                        <Run Text=" " />
-                                        <Run Text="{Binding Role}" />
-                                    </TextBlock>
+                                    <TextBlock Text="{Binding Description}"/>
                                     <ListView ItemsSource="{Binding WarehouseDependecies}" SelectedItem="{Binding SelectedWarehouse}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
@@ -104,6 +94,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </Grid>
 </Page>

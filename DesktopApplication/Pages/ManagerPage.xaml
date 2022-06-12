@@ -33,6 +33,10 @@
                 Name="buttonShowClients"
                 Click="buttonShowClients_Click"
                 Content="Список клиентов" />
+            <Button
+                x:Name="ButtonShowProjects"
+                Margin="10,0,0,0"
+                Content="Список проектов" Click="ButtonShowProjects_Click" />
         </StackPanel>
         <Frame
             Name="frameManagerPage"

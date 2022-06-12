@@ -130,8 +130,14 @@
     <Compile Include="Pages\ShowContactsPage.xaml.cs">
       <DependentUpon>ShowContactsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ShowProjectsPage.xaml.cs">
+      <DependentUpon>ShowProjectsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ShowStocks.xaml.cs">
       <DependentUpon>ShowStocks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowStocksForProjectPage.xaml.cs">
+      <DependentUpon>ShowStocksForProjectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ShowWareHouses.xaml.cs">
       <DependentUpon>ShowWareHouses.xaml</DependentUpon>
@@ -212,8 +218,11 @@
     <Compile Include="ViewModels\LoginPasswordFieldsViewModel.cs" />
     <Compile Include="ViewModels\ManagerPageViewModel.cs" />
     <Compile Include="ViewModels\PagesHolderViewModel.cs" />
+    <Compile Include="ViewModels\ProjectInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\ShowClientsViewModel.cs" />
     <Compile Include="ViewModels\ShowContactsViewModel.cs" />
+    <Compile Include="ViewModels\ShowProjectsViewModel.cs" />
+    <Compile Include="ViewModels\ShowStocksForProjectViewModel.cs" />
     <Compile Include="ViewModels\StockInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\ShowStocksViewModel.cs" />
     <Compile Include="ViewModels\ShowUsersViewModel.cs" />
@@ -232,6 +241,9 @@
     </Compile>
     <Compile Include="Windows\PagesHolder.xaml.cs">
       <DependentUpon>PagesHolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ProjectInfoFields.xaml.cs">
+      <DependentUpon>ProjectInfoFields.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StockInfoFields.xaml.cs">
       <DependentUpon>StockInfoFields.xaml</DependentUpon>
@@ -264,7 +276,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShowProjectsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ShowStocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShowStocksForProjectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PagesHolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProjectInfoFields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
