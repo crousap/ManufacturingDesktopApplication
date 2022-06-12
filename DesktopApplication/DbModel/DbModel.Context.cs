@@ -38,6 +38,7 @@ namespace DesktopApplication.DbModel
         public virtual DbSet<Workshop> Workshops { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserInfoView> UserInfoViews { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
     
         public virtual ObjectResult<LoginChecker_Result> LoginChecker(string login, string password)
         {

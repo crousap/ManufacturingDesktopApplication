@@ -12,27 +12,22 @@ namespace DesktopApplication.DbModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Stock
+    public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Stock()
+        public Project()
         {
-            this.Orders = new HashSet<Order>();
-            this.Projects = new HashSet<Project>();
+            this.Stocks = new HashSet<Stock>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Ammount { get; set; }
         public string Description { get; set; }
-        public int WarehouseId { get; set; }
-        public string Position { get; set; }
     
-        public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual Workshop Workshop { get; set; }
+        public virtual ICollection<Stock> Stocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

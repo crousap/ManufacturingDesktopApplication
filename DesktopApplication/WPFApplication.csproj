@@ -120,6 +120,9 @@
     <Compile Include="Commands\RemoveUserCommand.cs" />
     <Compile Include="Commands\ProceedCommand.cs" />
     <Compile Include="Commands\SaveChangesCommand.cs" />
+    <Compile Include="DbModel\Project.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WarehouseDependency.cs" />
     <Compile Include="Pages\ShowClientsPage.xaml.cs">
       <DependentUpon>ShowClientsPage.xaml</DependentUpon>

@@ -40,6 +40,30 @@
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="StockId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ProjectStock">
+          <Key>
+            <PropertyRef Name="StockId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="StockId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectUser">
+          <Key>
+            <PropertyRef Name="UserLogin" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="UserLogin" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Name" />
@@ -212,6 +236,54 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProjectStock_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectStock" Type="Self.ProjectStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectStock">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectStock_Stock">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="1" />
+          <End Role="ProjectStock" Type="Self.ProjectStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectStock">
+              <PropertyRef Name="StockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUser_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectUser" Type="Self.ProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUser">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ProjectUser" Type="Self.ProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="ProjectUser">
+              <PropertyRef Name="UserLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Stock_Warehouse">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
           <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
@@ -348,6 +420,9 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderStock" EntityType="Self.OrderStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectStock" EntityType="Self.ProjectStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectUser" EntityType="Self.ProjectUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -392,6 +467,22 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <AssociationSet Name="FK_OrderStock_Stock" Association="Self.FK_OrderStock_Stock">
             <End Role="Stock" EntitySet="Stock" />
             <End Role="OrderStock" EntitySet="OrderStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectStock_Project" Association="Self.FK_ProjectStock_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectStock" EntitySet="ProjectStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectStock_Stock" Association="Self.FK_ProjectStock_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="ProjectStock" EntitySet="ProjectStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUser_Project" Association="Self.FK_ProjectUser_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectUser" EntitySet="ProjectUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUser_User" Association="Self.FK_ProjectUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ProjectUser" EntitySet="ProjectUser" />
           </AssociationSet>
           <AssociationSet Name="FK_Stock_Warehouse" Association="Self.FK_Stock_Warehouse">
             <End Role="Warehouse" EntitySet="Warehouse" />
@@ -476,6 +567,7 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <NavigationProperty Name="Orders" Relationship="Self.OrderStock" FromRole="Stock" ToRole="Order" />
           <Property Name="Position" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Workshop" Relationship="manufacturingModel.FK_Stock_Workshop" FromRole="Stock" ToRole="Workshop" />
+          <NavigationProperty Name="Projects" Relationship="manufacturingModel.ProjectStock" FromRole="Stock" ToRole="Project" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -499,6 +591,7 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
           <NavigationProperty Name="Warehouses" Relationship="Self.UserWarehouse" FromRole="User" ToRole="Warehouse" />
           <NavigationProperty Name="Workshops" Relationship="Self.UserWorkshop" FromRole="User" ToRole="Workshop" />
           <NavigationProperty Name="Role1" Relationship="manufacturingModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Projects" Relationship="manufacturingModel.ProjectUser" FromRole="User" ToRole="Project" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -696,6 +789,15 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
             <End Role="Workshop" EntitySet="Workshops" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
+          <EntitySet Name="Projects" EntityType="manufacturingModel.Project" />
+          <AssociationSet Name="ProjectStock" Association="manufacturingModel.ProjectStock">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectUser" Association="manufacturingModel.ProjectUser">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="LoginChecker_Result">
           <Property Type="String" Name="Login" Nullable="false" MaxLength="150" />
@@ -768,6 +870,24 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
               <PropertyRef Name="WarehouseId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Stocks" Relationship="manufacturingModel.ProjectStock" FromRole="Project" ToRole="Stock" />
+          <NavigationProperty Name="Users" Relationship="manufacturingModel.ProjectUser" FromRole="Project" ToRole="User" />
+        </EntityType>
+        <Association Name="ProjectStock">
+          <End Type="manufacturingModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="manufacturingModel.Stock" Role="Stock" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectUser">
+          <End Type="manufacturingModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="manufacturingModel.User" Role="User" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -956,6 +1076,31 @@ warning 6002: The table/view 'manufacturing.dbo.UserInfoView' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="manufacturingModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProjectStock" TypeName="manufacturingModel.ProjectStock" StoreEntitySet="ProjectStock">
+            <EndProperty Name="Stock">
+              <ScalarProperty Name="Id" ColumnName="StockId" />
+            </EndProperty>
+            <EndProperty Name="Project">
+              <ScalarProperty Name="Id" ColumnName="ProjectId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectUser" TypeName="manufacturingModel.ProjectUser" StoreEntitySet="ProjectUser">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Login" ColumnName="UserLogin" />
+            </EndProperty>
+            <EndProperty Name="Project">
+              <ScalarProperty Name="Id" ColumnName="ProjectId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

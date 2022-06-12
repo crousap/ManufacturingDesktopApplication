@@ -26,6 +26,9 @@
         <AssociationConnector Association="manufacturingModel.FK_User_Role" />
         <EntityTypeShape EntityType="manufacturingModel.UserInfoView" Width="1.5" PointX="0.75" PointY="9.75" />
         <AssociationConnector Association="manufacturingModel.FK_Stock_Workshop" />
+        <EntityTypeShape EntityType="manufacturingModel.Project" Width="1.5" PointX="0.75" PointY="7.5" />
+        <AssociationConnector Association="manufacturingModel.ProjectStock" />
+        <AssociationConnector Association="manufacturingModel.ProjectUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
