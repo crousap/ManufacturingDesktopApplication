@@ -58,8 +58,9 @@ namespace DesktopApplication.ViewModels
             }
         }
 
-        public ChooseStocksForProjectViewModel(Project currentProject, Windows.ChooseStocksForProject view)
+        public ChooseStocksForProjectViewModel(Project currentProject, Windows.ChooseStocksForProject view, manufacturingEntities context)
         {
+            _context = context;
             _currentProject = currentProject;
             _view = view;
             UpdateStocks();
@@ -67,7 +68,6 @@ namespace DesktopApplication.ViewModels
 
         private void UpdateStocks()
         {
-            _context = new manufacturingEntities();
             _context.Stocks.Load();
             _context.Projects.Load();
             Stocks = _context.Stocks.ToObservableCollection(); // Вывести товары, которые уже не перечислены в проекте
@@ -90,7 +90,9 @@ namespace DesktopApplication.ViewModels
         }
         private void SelecteStock(Stock stock)
         {
-            _context.Projects.FirstOrDefault((x) => x.Id == _currentProject.Id).Stocks.Add(stock);
+            _context.Projects.Load();
+            //_context.Projects.FirstOrDefault((x) => x.Id == _currentProject.Id).Stocks.Add(stock);
+            _currentProject.Stocks.Add(stock);
             _context.SaveChanges();
             _view.Close();
         }

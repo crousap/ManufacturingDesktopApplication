@@ -87,7 +87,7 @@ namespace DesktopApplication.ViewModels
             if (Status == null)
                 Status = "В процессе";
             var tempView = new Pages.ShowStocksForProjectPage();
-            var tempViewModel = new ShowStocksForProjectViewModel(currentProject, tempView);
+            var tempViewModel = new ShowStocksForProjectViewModel(currentProject, tempView, _context);
             tempView.DataContext = tempViewModel;
             _view.StocksFrame.Navigate(tempView);
         }

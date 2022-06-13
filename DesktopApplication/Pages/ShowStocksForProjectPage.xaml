@@ -11,17 +11,19 @@
     <Grid>
 
         <StackPanel>
-            <Button HorizontalAlignment="Left" Content="Изменить" Command="{Binding ChangeStocksCommand}"/>
-            <ListView ItemsSource="{Binding Stocks}" SelectedItem="{Binding SelectedStock}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Path=Description}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Button HorizontalAlignment="Left" Content="Добавить" Command="{Binding ChangeStocksCommand}"/>
+            <StackPanel>
+                <ListView ItemsSource="{Binding Stocks}" SelectedItem="{Binding SelectedStock}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Path=Description}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

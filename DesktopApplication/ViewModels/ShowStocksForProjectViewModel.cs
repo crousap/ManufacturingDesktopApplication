@@ -50,16 +50,20 @@ namespace DesktopApplication.ViewModels
         {
             ChangeStocksCommand = new RelayCommand(() => ChangeStock());
         }
-        public ShowStocksForProjectViewModel(Project currentStock, ShowStocksForProjectPage view) : this()
+        public ShowStocksForProjectViewModel(Project currentProject, ShowStocksForProjectPage view, manufacturingEntities context) : this()
         {
-            _currentProject = currentStock;
+            _context = context;
+            _currentProject = currentProject;
             _view = view;
             UpdateStockList();
-            _currentProject = _context.Projects.FirstOrDefault((x) => x.Id == currentStock.Id);
+            var projectInContext = _context.Projects.FirstOrDefault((x) => x.Id == currentProject.Id);
+            if (projectInContext == null)
+                return;
+            _currentProject = projectInContext;
         }
         private void UpdateStockList()
         {
-            _context = new manufacturingEntities();
+            //_context = new manufacturingEntities();
             _context.Stocks.Load();
             _context.Projects.Load();
             Stocks = _currentProject.Stocks.ToObservableCollection();
@@ -67,7 +71,7 @@ namespace DesktopApplication.ViewModels
         public void ChangeStock()
         {
             var view = new Windows.ChooseStocksForProject();
-            var viewModel = new ViewModels.ChooseStocksForProjectViewModel(_currentProject, view);
+            var viewModel = new ViewModels.ChooseStocksForProjectViewModel(_currentProject, view, _context);
             view.DataContext = viewModel;
             view.ShowDialog();
             UpdateStockList();
