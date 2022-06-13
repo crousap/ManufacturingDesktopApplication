@@ -213,6 +213,7 @@
       <DependentUpon>ShowUsersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Roles.cs" />
+    <Compile Include="ViewModels\ChooseStocksForProjectViewModel.cs" />
     <Compile Include="ViewModels\ClientInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\ContactInfoFieldsViewModel.cs" />
     <Compile Include="ViewModels\LoginPasswordFieldsViewModel.cs" />
@@ -230,6 +231,9 @@
     <Compile Include="ViewModels\UserInfoFIeldsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WarehousemanViewModel.cs" />
+    <Compile Include="Windows\ChooseStocksForProject.xaml.cs">
+      <DependentUpon>ChooseStocksForProject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ClientInfoFields.xaml.cs">
       <DependentUpon>ClientInfoFields.xaml</DependentUpon>
     </Compile>
@@ -297,6 +301,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WarehousemanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChooseStocksForProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

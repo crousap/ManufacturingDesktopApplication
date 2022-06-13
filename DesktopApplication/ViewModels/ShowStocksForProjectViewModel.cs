@@ -66,7 +66,11 @@ namespace DesktopApplication.ViewModels
         }
         public void ChangeStock()
         {
-            
+            var view = new Windows.ChooseStocksForProject();
+            var viewModel = new ViewModels.ChooseStocksForProjectViewModel(_currentProject, view);
+            view.DataContext = viewModel;
+            view.ShowDialog();
+            UpdateStockList();
         }
     }
 }
